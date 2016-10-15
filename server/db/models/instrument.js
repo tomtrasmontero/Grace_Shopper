@@ -2,13 +2,7 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
-module.exports = {
-	models:{
-		Instrument: Instrument
-	}
-};
-
-const Instrument = db.define('instrument', {
+module.exports = db.define('instrument', {
 	title: {
         type: Sequelize.STRING
     },

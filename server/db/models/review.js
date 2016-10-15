@@ -2,13 +2,7 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
-module.exports = {
-	models:{
-		Review: Review
-	}
-};
-
-const Review = db.define('review', {
+module.exports = db.define('review', {
 	product: {
         type: Sequelize.STRING
     },

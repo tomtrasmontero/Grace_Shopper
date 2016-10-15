@@ -2,13 +2,7 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
-module.exports = {
-	models:{
-		Address: Address
-	}
-}
-
-var Address = db.define('address', {
+module.exports = db.define('address', {
     line1: {
         type: Sequelize.STRING
     },

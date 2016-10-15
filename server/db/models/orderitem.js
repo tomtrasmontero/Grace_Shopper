@@ -2,13 +2,7 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
-module.exports = {
-	models:{
-		OrderItem: OrderItem
-	}
-};
-
-var OrderItem = db.define('orderItem', {
+module.exports = db.define('orderItem', {
     quantity: {
         type: Sequelize.INTEGER
     },
