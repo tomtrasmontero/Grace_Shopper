@@ -122,7 +122,7 @@ const Review = db.define('review', {
 });
 
 
-module.exports = db{
+module.exports = {
 	models:{
 		Users: Users,
 		Order: Order,

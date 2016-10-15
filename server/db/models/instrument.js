@@ -1,0 +1,34 @@
+var Sequelize = require('sequelize');
+
+var db = require('../_db');
+
+module.exports = {
+	models:{
+		Instrument: Instrument
+	}
+};
+
+const Instrument = db.define('instrument', {
+	title: {
+        type: Sequelize.STRING
+    },
+    brand: {
+        type: Sequelize.STRING
+    },
+    price: {
+        type: Sequelize.FLOAT
+    },
+    family: {
+        type: Sequelize.STRING
+    },
+    type: {
+        type: Sequelize.STRING
+    },
+    description: {
+        type: Sequelize.STRING
+    },
+    image: {
+        type: Sequelize.ARRAY(Sequelize.STRING)
+    }
+});
+
