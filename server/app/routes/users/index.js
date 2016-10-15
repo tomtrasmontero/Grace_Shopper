@@ -14,7 +14,7 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
-router.get('/', /* ensureAuthenticated,*/ function (req, res) {
+router.get('/', ensureAuthenticated, function (req, res) {
     return User.findAll()
     .then(function(users) {
         res.send(users);
