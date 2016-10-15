@@ -4,7 +4,11 @@ var db = require('../_db');
 
 module.exports = db.define('review', {
 	product: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        //validate that the review is not blank
+        validate:{
+            min: 1
+        }
     },
     rating: {
         type: Sequelize.INTEGER
