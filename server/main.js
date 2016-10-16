@@ -1,6 +1,6 @@
 'use strict';
 var chalk = require('chalk');
-var db = require('./db').db;
+var db = require('./db');
 
 // Create a node server instance! cOoL!
 var server = require('http').createServer();
@@ -21,7 +21,7 @@ var startServer = function () {
 
 };
 
-db.sync({force:true})
+db.sync()
 .then(createApplication)
 .then(startServer)
 .catch(function (err) {
