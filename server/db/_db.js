@@ -7,5 +7,4 @@ var db = new Sequelize(env.DATABASE_URL, {
   native: env.NATIVE
 });
 
-console.log(db);
 module.exports = db;
