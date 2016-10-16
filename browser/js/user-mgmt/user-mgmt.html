@@ -1,3 +1,5 @@
-<ul>
-<li ng-repeat="user in users">Name: {{user.lastName}}, {{user.firstName}}</li>
+<ul class="list-group">
+	<li ng-repeat="user in users" class="list-group-item">
+		<a ui-sref="userProfile({id: user.id})"> {{user.lastName}}, {{user.firstName}}</a> 
+	</li>
 </ul>

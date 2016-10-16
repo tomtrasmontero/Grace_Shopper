@@ -20,3 +20,10 @@ router.get('/', ensureAuthenticated, function (req, res) {
         res.send(users);
     });
 });
+
+router.get('/:id', ensureAuthenticated, function(req, res) {
+    return User.findById(req.params.id)
+    .then(function(user) {
+        res.send(user);
+    });
+});

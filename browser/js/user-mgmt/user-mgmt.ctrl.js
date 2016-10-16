@@ -1,5 +1,5 @@
-app.controller('userMgmtCtrl', function($scope, userMgmtFactory) {
-	return userMgmtFactory.getAll()
+app.controller('userMgmtCtrl', function($scope, userFactory) {
+	return userFactory.getAll()
 	.then(function(users) {
 		$scope.users = users;
 	});
