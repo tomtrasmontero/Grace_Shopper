@@ -8,7 +8,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
 
             scope.items = [
                 { label: 'Home', state: 'home' },
-                { label: 'Products', state: 'home' },
+                { label: 'Products', state: 'product' },
                 { label: 'User Management', state: 'userMgmt', auth: true },
                 { label: 'Product Management', state: 'home', auth: true },
                 { label: 'Order Management', state: 'home', auth: true },
