@@ -1,8 +1,15 @@
 <ul class="list-group">
+	<button class="btn btn-danger" ng-click="deleteUser(user.id)">Delete</button>
 	<li class="list-group-item">
 		Name: {{ user.firstName }} {{ user.lastName }}
 	</li>
 	<li class="list-group-item">
 		Email: {{ user.email }}
+	</li>
+	<li class="list-group-item">
+		Password: {{ user.password }}
+	</li>
+	<li class="list-group-item">
+		Type: {{ user.type }}
 	</li>
 </ul>

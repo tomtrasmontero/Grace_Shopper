@@ -14,15 +14,43 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
-router.get('/', ensureAuthenticated, function (req, res) {
-    return User.findAll()
+router.get('/', ensureAuthenticated, function (req, res, next) {
+    User.findAll()
     .then(function(users) {
         res.send(users);
     });
 });
 
-router.get('/:id', ensureAuthenticated, function(req, res) {
-    return User.findById(req.params.id)
+router.get('/:id', ensureAuthenticated, function(req, res, next) {
+    User.findById(req.params.id)
+    .then(function(user) {
+        res.send(user);
+    });
+});
+
+router.post('/', function(req, res, next) {
+    User.create(req.body)
+    .then(function(user) {
+        res.send(user);
+    });
+});
+
+router.delete('/:id', function(req, res, next) {
+    User.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(function() {
+        res.sendStatus(200);
+    });
+});
+
+router.put('/:id', function(req, res, next) {
+    User.findById(req.params.id)
+    .then(function(user) {
+        return user.update(req.body);
+    })
     .then(function(user) {
         res.send(user);
     });
