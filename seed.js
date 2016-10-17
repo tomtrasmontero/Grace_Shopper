@@ -55,7 +55,8 @@ var seedUsers = function () {
             password: 'password',
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
-            phone: faker.phone.phoneNumber()
+            phone: faker.phone.phoneNumber(),
+            avatar: faker.image.avatar()
         });
     }
 
