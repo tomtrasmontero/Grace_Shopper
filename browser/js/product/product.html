@@ -1,20 +1,15 @@
 <div class='container-fluid'>
+	<div class='col-xs-3 pull-left'>
+	Filter Here
+	</div>
+	
 	<div class='col-xs-9 pull-right'	
 		<ul class='list-group'>
 			<li class='list-group-item' ng-repeat='instrument in products'>
-				<div>
-				{{instrument.title}}
-				{{instrument.brand}}
-				{{instrument.price}}
-				</div>
-				<p class='pull-right'>{{instrument.description}}</p>
-				<br clear='all'>
+				<data-product-card product="instrument"></data-product-card>
 			</li>		
 		</ul>
 		<br clear='all'>
-
-		<div class='col-xs-3 pull-left'>
-		Filter placeholder
-		</div>
+	</div>
 </div>	
 
