@@ -18,15 +18,22 @@ name in the environment files.
 */
 
 var chalk = require('chalk');
+var faker = require('faker');
+var Promise = require('sequelize').Promise;
 var db = require('./server/db');
+
 var User = db.model('user');
 var Address = db.model('address');
 var Order = db.model('order');
 var Instrument = db.model('instrument');
-var faker = require('faker');
-var Promise = require('sequelize').Promise;
+var Review = db.model('review');
+
 var numUsers = 10;
 
+
+var randomDate = function(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+};
 
 var seedUsers = function () {
 
@@ -37,7 +44,8 @@ var seedUsers = function () {
             firstName: 'Donald',
             lastName: 'Trump',
             phone: '888-888-8888',
-            type: 'Admin'
+            type: 'Admin',
+            avatar: faker.image.avatar()
         }
     ];
 
@@ -71,7 +79,7 @@ var seedAddresses = function() {
             zip: Number(faker.address.zipCode().slice(0,5)),
             type: ['billing', 'shipping'][Math.round(Math.random())],
             country: "US",
-            userId: [...Array(numUsers + 1).keys()].slice(1)[Math.floor(Math.random() * numUsers)]
+            userId: Math.floor(Math.random() * (numUsers - 1)) + 1
         });
     }
 
@@ -85,10 +93,6 @@ var seedAddresses = function() {
 
 var seedOrders = function() {
 
-    var randomDate = function(start, end) {
-        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-    };
-
     var orders = [];
     for (let i = 0; i < numUsers; i++) {
 
@@ -97,7 +101,7 @@ var seedOrders = function() {
         orders.push({
             status: (isPlaced? 'order': 'cart'),
             orderDate: (isPlaced? randomDate(new Date(2012, 0, 1), new Date()): null),
-            userId: [...Array(numUsers + 1).keys()].slice(1)[Math.floor(Math.random() * numUsers)]
+            userId: Math.floor(Math.random() * (numUsers - 1)) + 1
         });
     }
 
@@ -120,7 +124,8 @@ var seedInstruments = function() {
             price: (Math.random()*100.00).toFixed(2),
             family: "family" + (i+1),
             type: "type" + (i+1),
-            description: faker.company.bs()
+            description: faker.company.bs(),
+            image: [faker.image.imageUrl(400,400,"cats")]
         });
     }
 
@@ -132,6 +137,27 @@ var seedInstruments = function() {
 
 };
 
+var seedReviews = function() {
+    var reviews = [];
+    for (let i = 0; i < numUsers; i++) {
+
+        reviews.push({
+            content: faker.lorem.paragraph(),
+            rating: Math.floor(Math.random() * 5 + 1),
+            date: randomDate(new Date(2012, 0, 1), new Date()),
+            title: faker.lorem.words(),
+            userId: Math.floor(Math.random() * (numUsers - 1)) + 1,
+            instrumentId: Math.floor(Math.random() * (numUsers - 1)) + 1
+        });
+    }
+
+    var creatingReviews = reviews.map(function(reviewObj) {
+        return Review.create(reviewObj);
+    });
+
+    return Promise.all(creatingReviews);
+}
+
 db.sync({ force: true })
     .then(function () {
         return seedUsers();
@@ -141,6 +167,11 @@ db.sync({ force: true })
             seedAddresses(),
             seedOrders(),
             seedInstruments()
+            ]);
+    })
+    .then(function() {
+        return Promise.all([
+            seedReviews()
             ]);
     })
     .then(function () {
