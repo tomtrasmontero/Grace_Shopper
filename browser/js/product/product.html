@@ -3,11 +3,9 @@
 	Filter Here
 	</div>
 	
-	<div class='col-xs-9 pull-right'	
+	<div class='col-xs-9 pull-right'>	
 		<ul class='list-group'>
-			<li class='list-group-item' ng-repeat='instrument in products'>
-				<data-product-card product="instrument"></data-product-card>
-			</li>		
+			<data-product-card ng-repeat='instrument in products' product="instrument"></data-product-card>	
 		</ul>
 		<br clear='all'>
 	</div>
