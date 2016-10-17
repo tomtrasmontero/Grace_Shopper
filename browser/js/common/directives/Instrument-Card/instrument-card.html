@@ -1,7 +1,12 @@
-<div class='container col-md-4'>
-	<h3>{{product.title}}</h3>
-	<img class='img-responsive' style='width:65%;height:250px;' src='js/common/directives/instrument-card/rock.jpg'/>
-</div>
-<p class='pull-right'>{{product.description}}</p>
-
+<div class='container col-md-4 col-l'>
+	<div>
+		<h3>{{product.title}}</h3>
+		<a ui-sref="productDetail({ id: {{product.id}} })" class='thumbnail'>
+			<img class='img-responsive' style='width:100%;height:250px;' src='js/common/directives/instrument-card/rock.jpg' alt='product pic'/>
+		</a>
+	</div>
+	<div>	
+		<p>{{product.description}}</p>
+	</div>
 <br clear='all'>
+</div>

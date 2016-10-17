@@ -7,10 +7,15 @@ app.factory('productFactory', function($http){
 			.then(function(result){
 				angular.copy(result.data, products);
 				return result.data;
-			})
+			});
+		},
+
+		getProduct: function(id){
+			return $http.get('/api/product/' + id)
+			.then(function(product){
+				return product.data;
+			});
 		}
 
-
-
-	}
+	};
 });

@@ -1,5 +1,6 @@
-app.config(function($stateProvider) {
-	$stateProvider.state('product', {
+app.config(function($stateProvider, $urlRouterProvider) {
+	$stateProvider
+	.state('product', {
 		url: '/product',
 		templateUrl: 'js/product/product.html',
 		controller: 'productCtrl',
@@ -9,4 +10,17 @@ app.config(function($stateProvider) {
 			}
 		}
 	})
+	.state('productDetail', {
+		url: '/product/:id',
+		templateUrl: 'js/product/product.detail.html',
+		controller: 'productDetailCtrl',
+		resolve: {
+			product: function(productFactory,$stateParams){
+				return productFactory.getProduct($stateParams.id)
+			}
+		}
+	});
+
+	$urlRouterProvider.otherwise('/');
+
 });
