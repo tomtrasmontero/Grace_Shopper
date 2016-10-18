@@ -9,3 +9,8 @@ app.controller('productDetailCtrl', function($scope, $stateParams,$state,product
 	$scope.product = product;
 	$scope.reviews = product.reviews;
 });
+
+//Product Managment controller
+app.controller('productMgmtCtrl', function($scope){
+
+});
