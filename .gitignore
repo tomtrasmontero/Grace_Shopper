@@ -4,5 +4,3 @@ npm-debug.log
 public
 .DS_Store
 coverage
-.gitignore
-package.son

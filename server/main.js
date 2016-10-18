@@ -2,8 +2,6 @@
 var chalk = require('chalk');
 var db = require('./db');
 
-
-
 // Create a node server instance! cOoL!
 var server = require('http').createServer();
 

@@ -26,14 +26,8 @@ var User = db.model('user');
 var Address = db.model('address');
 var Order = db.model('order');
 var Instrument = db.model('instrument');
-<<<<<<< Updated upstream
 var Review = db.model('review');
 
-=======
-var OrderItem = db.model('orderitem');
-var faker = require('faker');
-var Promise = require('sequelize').Promise;
->>>>>>> Stashed changes
 var numUsers = 10;
 
 
@@ -108,12 +102,7 @@ var seedOrders = function() {
         orders.push({
             status: (isPlaced? 'order': 'cart'),
             orderDate: (isPlaced? randomDate(new Date(2012, 0, 1), new Date()): null),
-<<<<<<< Updated upstream
             userId: Math.floor(Math.random() * (numUsers - 1)) + 1
-=======
-            userId: [...Array(numUsers + 1).keys()].slice(1)[Math.floor(Math.random() * numUsers)],
-            addressId: i+1,
->>>>>>> Stashed changes
         });
     }
 
@@ -149,7 +138,6 @@ var seedInstruments = function() {
 
 };
 
-<<<<<<< Updated upstream
 var seedReviews = function() {
     var reviews = [];
     for (let i = 0; i < numUsers; i++) {
@@ -170,31 +158,6 @@ var seedReviews = function() {
 
     return Promise.all(creatingReviews);
 }
-=======
-
-var seedOrderItems = function() {
-
-    var orderItems = [];
-    for (let i = 0; i < numUsers; i++) {
-
-        orderItems.push({
-            quantity: i+1,
-            price: i+1,
-            orderId: i+1,
-            instrumentId: i+1,
-        });
-    }
-
-    var creatingOrderItems = orderItems.map(function(orderItemsObj) {
-        return OrderItem.create(orderItemsObj);
-    });
-
-    return Promise.all(creatingOrderItems);
-
-};
-
-
->>>>>>> Stashed changes
 
 db.sync({ force: true })
     .then(function () {
@@ -207,15 +170,10 @@ db.sync({ force: true })
             seedInstruments()
             ]);
     })
-<<<<<<< Updated upstream
     .then(function() {
         return Promise.all([
             seedReviews()
             ]);
-=======
-    .then(function(){
-       return seedOrderItems();
->>>>>>> Stashed changes
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));

@@ -14,12 +14,8 @@ var Instrument = require('./models/instrument');
 User.hasMany(Address);
 User.hasMany(Review);
 User.hasMany(Order);
-Order.belongsTo(User);
 Order.hasMany(OrderItem);
 Instrument.hasMany(Review);
 Instrument.hasMany(OrderItem);
-OrderItem.belongsTo(Instrument);
-Address.hasMany(Order);
-Order.belongsTo(Address);
 
 module.exports = db;
