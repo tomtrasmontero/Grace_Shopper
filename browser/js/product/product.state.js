@@ -20,6 +20,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			}
 		}
 	});
+	.state('productMgmt', {
+		url: '/product/mgmt',
+		templateUrl: 'js/product/product.mgmt.html',
+		controller: 'productMgmtCtrl'
+	});
 
 	$urlRouterProvider.otherwise('/');
 
