@@ -11,9 +11,15 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                 { label: 'Products', state: 'product' },
                 { label: 'User Management', state: 'userMgmt', auth: true },
                 { label: 'Product Management', state: 'home', auth: true },
+<<<<<<< Updated upstream
                 { label: 'Order Management', state: 'home', auth: true },
                 { label: 'My Cart', state: 'home'},
                 { label: 'My Profile', state: 'userProfile({id: user.id})', auth: true }
+=======
+                { label: 'Order Management', state: 'orderList', auth: true },
+                { label: 'My Cart', state: 'cart'},
+                { label: 'My Profile', state: 'home', auth: true }
+>>>>>>> Stashed changes
             ];
 
             scope.user = null;

@@ -18,28 +18,15 @@ name in the environment files.
 */
 
 var chalk = require('chalk');
-var faker = require('faker');
-var Promise = require('sequelize').Promise;
 var db = require('./server/db');
-
 var User = db.model('user');
 var Address = db.model('address');
 var Order = db.model('order');
 var Instrument = db.model('instrument');
-<<<<<<< Updated upstream
-var Review = db.model('review');
-
-=======
-var OrderItem = db.model('orderitem');
 var faker = require('faker');
 var Promise = require('sequelize').Promise;
->>>>>>> Stashed changes
 var numUsers = 10;
 
-
-var randomDate = function(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-};
 
 var seedUsers = function () {
 
@@ -50,8 +37,7 @@ var seedUsers = function () {
             firstName: 'Donald',
             lastName: 'Trump',
             phone: '888-888-8888',
-            type: 'Admin',
-            avatar: faker.image.avatar()
+            type: 'Admin'
         }
     ];
 
@@ -61,8 +47,7 @@ var seedUsers = function () {
             password: 'password',
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
-            phone: faker.phone.phoneNumber(),
-            avatar: faker.image.avatar()
+            phone: faker.phone.phoneNumber()
         });
     }
 
@@ -86,7 +71,7 @@ var seedAddresses = function() {
             zip: Number(faker.address.zipCode().slice(0,5)),
             type: ['billing', 'shipping'][Math.round(Math.random())],
             country: "US",
-            userId: Math.floor(Math.random() * (numUsers - 1)) + 1
+            userId: [...Array(numUsers + 1).keys()].slice(1)[Math.floor(Math.random() * numUsers)]
         });
     }
 
@@ -100,6 +85,10 @@ var seedAddresses = function() {
 
 var seedOrders = function() {
 
+    var randomDate = function(start, end) {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    };
+
     var orders = [];
     for (let i = 0; i < numUsers; i++) {
 
@@ -108,12 +97,7 @@ var seedOrders = function() {
         orders.push({
             status: (isPlaced? 'order': 'cart'),
             orderDate: (isPlaced? randomDate(new Date(2012, 0, 1), new Date()): null),
-<<<<<<< Updated upstream
-            userId: Math.floor(Math.random() * (numUsers - 1)) + 1
-=======
-            userId: [...Array(numUsers + 1).keys()].slice(1)[Math.floor(Math.random() * numUsers)],
-            addressId: i+1,
->>>>>>> Stashed changes
+            userId: [...Array(numUsers + 1).keys()].slice(1)[Math.floor(Math.random() * numUsers)]
         });
     }
 
@@ -136,8 +120,7 @@ var seedInstruments = function() {
             price: (Math.random()*100.00).toFixed(2),
             family: "family" + (i+1),
             type: "type" + (i+1),
-            description: faker.company.bs(),
-            image: [faker.image.cats(),faker.random.image(),faker.random.image()]
+            description: faker.company.bs()
         });
     }
 
@@ -148,53 +131,6 @@ var seedInstruments = function() {
     return Promise.all(creatingInstruments);
 
 };
-
-<<<<<<< Updated upstream
-var seedReviews = function() {
-    var reviews = [];
-    for (let i = 0; i < numUsers; i++) {
-
-        reviews.push({
-            content: faker.lorem.paragraph(),
-            rating: Math.floor(Math.random() * 5 + 1),
-            date: randomDate(new Date(2012, 0, 1), new Date()),
-            title: faker.lorem.words(),
-            userId: Math.floor(Math.random() * (numUsers - 1)) + 1,
-            instrumentId: Math.floor(Math.random() * (numUsers - 1)) + 1
-        });
-    }
-
-    var creatingReviews = reviews.map(function(reviewObj) {
-        return Review.create(reviewObj);
-    });
-
-    return Promise.all(creatingReviews);
-}
-=======
-
-var seedOrderItems = function() {
-
-    var orderItems = [];
-    for (let i = 0; i < numUsers; i++) {
-
-        orderItems.push({
-            quantity: i+1,
-            price: i+1,
-            orderId: i+1,
-            instrumentId: i+1,
-        });
-    }
-
-    var creatingOrderItems = orderItems.map(function(orderItemsObj) {
-        return OrderItem.create(orderItemsObj);
-    });
-
-    return Promise.all(creatingOrderItems);
-
-};
-
-
->>>>>>> Stashed changes
 
 db.sync({ force: true })
     .then(function () {
@@ -207,16 +143,6 @@ db.sync({ force: true })
             seedInstruments()
             ]);
     })
-<<<<<<< Updated upstream
-    .then(function() {
-        return Promise.all([
-            seedReviews()
-            ]);
-=======
-    .then(function(){
-       return seedOrderItems();
->>>>>>> Stashed changes
-    })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);
@@ -225,3 +151,13 @@ db.sync({ force: true })
         console.error(err);
         process.exit(1);
     });
+
+
+
+
+module.exports = {
+        seedUsers: seedUsers,
+        seedAddresses: seedAddresses,
+        seedOrders: seedOrders,
+        seedInstruments: seedInstruments,
+}

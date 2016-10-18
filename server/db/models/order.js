@@ -14,5 +14,8 @@ module.exports = db.define('order', {
     },
     total: {
         type: Sequelize.INTEGER
-    }
+    },
+    tracking:{
+        type: Sequelize.STRING
+    },
 });
