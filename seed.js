@@ -126,7 +126,7 @@ var seedInstruments = function() {
             family: "family" + (i+1),
             type: "type" + (i+1),
             description: faker.company.bs(),
-            image: [faker.image.imageUrl(400,400,"cats")]
+            image: [faker.image.cats(),faker.random.image(),faker.random.image()]
         });
     }
 
