@@ -28,7 +28,7 @@ var Order = db.model('order');
 var Instrument = db.model('instrument');
 var Review = db.model('review');
 
-var numUsers = 10;
+var numUsers = 30;
 
 
 var randomDate = function(start, end) {

@@ -1,34 +1,36 @@
-<div>
-	<div>
-		<ul class='col-md-6 col-md-offset-3 pull-right'>
-				<img class="img-responsive" style='width:80%;height:250px;padding:5px;' ' ng-src="{{product.image[0]}}"/>
+<div class='container'>
+	<div class='col-md-6 pull-right'>
+		<ul>
+			<img class="img-responsive" style='width:80%;height:250px;padding:5px;' ' ng-src="{{product.image[0]}}"/>
 
-				<img class="img-responsive" style='width:80%;height:250px;padding:5px;' ' ng-src="{{product.image[1]}}"/>
+			<img class="img-responsive" style='width:80%;height:250px;padding:5px;' ' ng-src="{{product.image[1]}}"/>
 
-				<img class="img-responsive" style='width:80%;height:250px;padding:5px;' ' ng-src="{{product.image[2]}}"/>		
+			<img class="img-responsive" style='width:80%;height:250px;padding:5px;' ' ng-src="{{product.image[2]}}"/>		
 		</ul>
 	</div>	
+	
+	<div class='col-md-5 pull-left'>
+		<h2>Product Detail</h2>
+		<ul>
+			<li>Title:{{product.title}}</li>
+			<li>Brand:{{product.brand}}</li>
+			<li>Type:{{product.type}}</li>
+			<li>Description:{{product.description}}</li>
+		</ul>
+	</div>
 </div>
 
 <div class='container'>
-	<h2>Product Detail</h2>
-	<ul>
-		<li>Title:{{product.title}}</li>
-		<li>Brand:{{product.brand}}</li>
-		<li>Type:{{product.type}}</li>
-		<li>Description:{{product.description}}</li>
-	</ul>
-</div>
-
-<div class="panel panel-default">
-	<h3>Product Reviews</h3>
-	<div ng-repeat='review in reviews'>
-		<div class='panel-heading'>
-			<h5>Title: {{review.title}}</h5>
-		</div>
-		<div class='panel-body'>
-			<p>User {{review.userId}} rated this a {{review.rating}} out of 5</p>
-			<p>{{review.content}}</p>
-		</div>
-	</div>	
-</div>
+	<div class="panel panel-default">
+		<h3>Product Reviews</h3>
+		<div ng-repeat='review in reviews'>
+			<div class='panel-heading'>
+				<h5>Title: {{review.title}}</h5>
+			</div>
+			<div class='panel-body'>
+				<p>User {{review.userId}} rated this a {{review.rating}} out of 5</p>
+				<p>{{review.content}}</p>
+			</div>
+		</div>	
+	</div>
+</div>	

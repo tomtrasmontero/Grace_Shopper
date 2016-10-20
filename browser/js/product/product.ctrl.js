@@ -1,6 +1,14 @@
-//Product controller
+//Products controller
 app.controller('productCtrl', function($scope,productFactory,products){
 	$scope.products = products;
+	
+	$scope.search = function(item){
+		return (angular.lowercase(item.description).indexOf(angular.lowercase($scope.query) || '') !== -1 ||
+			angular.lowercase(item.title).indexOf(angular.lowercase($scope.query) || '') !== -1 );
+	};
+
+
+
 });
 
 //Product Detail controller
