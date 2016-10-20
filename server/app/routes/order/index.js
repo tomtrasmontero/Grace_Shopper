@@ -37,7 +37,7 @@ router.delete('/:id', function(req, res, next){
 			res.sendStatus(200);
 		})
 		.catch(next);
-})
+});
 
 router.get('/:id', function(req, res, next){
 
@@ -55,7 +55,7 @@ router.get('/:id', function(req, res, next){
 			res.send(result);
 		})
 		.catch(next);
-})
+});
 
 router.put('/:id/:quantity', function(req,res,next){
 
@@ -69,7 +69,7 @@ router.put('/:id/:quantity', function(req,res,next){
 		},
 	)
 	.catch(next);
-})
+});
 
 router.delete('/orderitem/:id', function(req,res,next){
 	OrderItem.destroy({
@@ -81,7 +81,7 @@ router.delete('/orderitem/:id', function(req,res,next){
 			console.log ('vvv');
 			res.sendStatus(200);
 		})
-})
+});
 
 router.put('/:id', function(req,res,next){
 	Promise.all([
@@ -107,7 +107,7 @@ router.put('/:id', function(req,res,next){
 			console.log ("city is " + req.body.address.city);
 		})
 		.catch(next);
-})
+});
 
 router.get('/cart/:userid', function(req,res,next){
 	console.log ("the id is " + req.params.userid);
@@ -135,7 +135,7 @@ router.get('/cart/:userid', function(req,res,next){
 		.catch(next);
 	console.log
 
-})
+});
 
 router.post('/place/:orderid', function(req, res, next){
 	console.log ("this zzz id is " + req.params.orderid);
@@ -147,4 +147,4 @@ router.post('/place/:orderid', function(req, res, next){
 		.then(function(result){
 			console.log (result);
 		})
-})
+});
