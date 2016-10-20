@@ -49,7 +49,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 				$scope.total = 0;
 				for (var i =0; i<$scope.order.orderitems.length; i++){
 					$scope.total = $scope.total + ($scope.order.orderitems[i].instrument.price * $scope.order.orderitems[i].quantity);
-				};
+				}
 
 
 
