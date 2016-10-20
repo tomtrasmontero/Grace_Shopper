@@ -1,0 +1,38 @@
+My Cart is tasty!
+
+<div class = "container">
+
+My cart:
+	<div ng-repeat="item in order.orderitems" >
+		<form name="oneitem">
+			{{item.instrument.title}}
+			<input class="form-control" type="text" ng-model = "item.quantity">
+			subtotal is {{item.instrument.price * item.quantity}}</br>
+			<button class="btn btn-danger" ng-click='changeQuantity(item.id, item.quantity, order.id)' ng-disabled = "item{{item.id}}.$invalid">change quantity</button>
+			<button class="btn btn-success" ng-click="deleteItem(item.id, $index, order.id)"> delete this item </button>
+		</form>
+	</div>
+
+shipping info:</br>
+	<form name="shipping">
+		First Name: {{order.user.firstName}}</br>
+		Last Name: {{order.user.lastName}}</br>
+		phone:{{order.user.phone}}</br>
+		shipping address line 1: <input class = 'form-control' type = 'text'  ng-model = 'order.address.line1'>
+		shipping address line 2: <input class = 'form-control' type = 'text'  ng-model = 'order.address.line2'>
+		shipping city: <input class = 'form-control' type = 'text' ng-model = 'order.address.city'>
+		shipping state: <input class = 'form-control' type = 'text' ng-pattern = "/^(\w{2})$/" ng-model = 'order.address.state'>
+		shipping zipcode: (5 digit only!) <input class = 'form-control' type = 'text'  ng-model = 'order.address.zip' ng-pattern = "/^(\d{5})$/">
+
+		shipping country: <input class = 'form-control' type = 'text'  ng-model = 'order.address.country'>
+		
+		<button class = "btn btn-warning" ng-click="submit()" ng-disabled="shipping.$invalid || !order.address.line1.length || !order.address.city.length || !order.address.state.length || !order.address.zip.length || !order.address.country.length" >Submit changes!</button>
+
+		<button class = "btn btn-primary" ng-click="placeOrder()" ng-disabled="shipping.$invalid || !order.address.line1.length || !order.address.city.length || !order.address.state.length || !order.address.zip.length || !order.address.country.length" >Place this Order!</button>
+	</form>
+
+
+
+
+
+</div>
