@@ -66,8 +66,7 @@ router.put('/:id/:quantity', function(req,res,next){
 		},
 		{	
 			where: {id: req.params.id}
-		},
-	)
+		})
 	.catch(next);
 });
 
@@ -133,7 +132,6 @@ router.get('/cart/:userid', function(req,res,next){
 			res.send(result);
 		})
 		.catch(next);
-	console.log
 
 });
 
