@@ -23,3 +23,4 @@ Address.hasMany(Order);
 Order.belongsTo(Address);
 
 module.exports = db;
+
