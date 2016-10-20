@@ -19,7 +19,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				return productFactory.getProduct($stateParams.id)
 			}
 		}
-	});
+	})
 	.state('productMgmt', {
 		url: '/product/mgmt',
 		templateUrl: 'js/product/product.mgmt.html',
