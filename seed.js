@@ -17,18 +17,19 @@ name in the environment files.
 
 */
 
-var chalk = require('chalk');
-var faker = require('faker');
-var Promise = require('sequelize').Promise;
-var db = require('./server/db');
+var chalk = require('chalk');//
+var faker = require('faker');//
+var Promise = require('sequelize').Promise;//
+var db = require('./server/db');//
 
-var User = db.model('user');
-var Address = db.model('address');
-var Order = db.model('order');
-var Instrument = db.model('instrument');
+var User = db.model('user');//
+var Address = db.model('address');//
+var Order = db.model('order');//
+var Instrument = db.model('instrument');//
 var Review = db.model('review');
+var OrderItem = db.model('orderitem'); //added
 
-var numUsers = 30;
+var numUsers = 10;//
 
 
 var randomDate = function(start, end) {
@@ -66,7 +67,7 @@ var seedUsers = function () {
 
     return Promise.all(creatingUsers);
 
-};
+}; //good
 
 var seedAddresses = function() {
 
@@ -90,7 +91,7 @@ var seedAddresses = function() {
 
     return Promise.all(creatingAddresses);
 
-};
+};//good
 
 var seedOrders = function() {
 
@@ -102,9 +103,18 @@ var seedOrders = function() {
         orders.push({
             status: (isPlaced? 'order': 'cart'),
             orderDate: (isPlaced? randomDate(new Date(2012, 0, 1), new Date()): null),
-            userId: Math.floor(Math.random() * (numUsers - 1)) + 1
+            userId: Math.floor(Math.random() * (numUsers - 1)) + 1,
+            addressId: i+1, // added
+
         });
     }
+
+    orders.push({
+        id: 50,
+        status:'cart',
+        userId: 1,
+        addressId: 1,
+    }) //added this order to special testing
 
     var creatingOrders = orders.map(function(orderObj) {
         return Order.create(orderObj);
@@ -159,6 +169,45 @@ var seedReviews = function() {
     return Promise.all(creatingReviews);
 }
 
+
+
+var seedOrderItems = function() {
+
+    var orderItems = [];
+    for (let i = 0; i < numUsers; i++) {
+
+        orderItems.push({
+            quantity: i+1,
+            price: i+1,
+            orderId: i+1,
+            instrumentId: i+1,
+        });
+
+        orderItems.push({
+            quantity:5+i,
+            price:5,
+            orderId:6,
+            instrumentId:3
+        });
+
+        orderItems.push({
+            quantity:10+i,
+            price:2,
+            orderId:50,
+            instrumentId:4,
+        })
+
+    }
+
+    var creatingOrderItems = orderItems.map(function(orderItemsObj) {
+        return OrderItem.create(orderItemsObj);
+    });
+
+    return Promise.all(creatingOrderItems);
+
+}; //added order items seed
+
+
 db.sync({ force: true })
     .then(function () {
         return seedUsers();
@@ -172,7 +221,8 @@ db.sync({ force: true })
     })
     .then(function() {
         return Promise.all([
-            seedReviews()
+            seedReviews(),
+            seedOrderItems()
             ]);
     })
     .then(function () {
