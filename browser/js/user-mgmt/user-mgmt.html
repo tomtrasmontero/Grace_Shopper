@@ -1,6 +1,6 @@
 <ul class="list-group">
 	<li ng-repeat="user in users" class="list-group-item">
-		<img src="{{user.avatar}}">
+		<img ng-src="{{user.avatar}}">
 		<a ui-sref="userProfile({id: user.id})"> {{user.lastName}}, {{user.firstName}}</a> 
 	</li>
 </ul>
