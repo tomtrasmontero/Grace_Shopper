@@ -21,9 +21,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 	})
 	.state('productMgmt', {
-		url: '/product/mgmt',
-		templateUrl: 'js/product/product.mgmt.html',
-		controller: 'productMgmtCtrl'
+		url: '/productMgmt',
+		templateUrl: 'js/product/product-management.html',
+		controller: 'productMgmtCtrl',
+		resolve: {
+			products: function(productFactory){
+				return productFactory.getAll()
+			}
+		}
 	});
 
 	$urlRouterProvider.otherwise('/');

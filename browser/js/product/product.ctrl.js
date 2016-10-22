@@ -19,6 +19,6 @@ app.controller('productDetailCtrl', function($scope, $stateParams,$state,product
 });
 
 //Product Managment controller
-app.controller('productMgmtCtrl', function(){
-
+app.controller('productMgmtCtrl', function($scope, products){
+	$scope.products = products;
 });
