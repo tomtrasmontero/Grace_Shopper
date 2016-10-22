@@ -10,7 +10,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                 { label: 'Home', state: 'home' },
                 { label: 'Products', state: 'product' },
                 { label: 'User Management', state: 'userMgmt', auth: true },
-                { label: 'Product Management', state: 'home', auth: true },
+                { label: 'Product Management', state: 'productMgmt', auth: true },
                 { label: 'Order Management', state: 'orderlist', auth: true },
                 { label: 'My Cart', state: 'cart'},
                 { label: 'My Profile', state: 'userProfile({id: user.id})', auth: true }

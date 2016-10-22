@@ -8,7 +8,8 @@ router.get('/', function(req,res,next){
 	return Instrument.findAll()
 	.then(function(instruments){
 		res.send(instruments);
-	});
+	})
+	.catch(next);
 });
 
 router.get('/:id', function(req,res,next){
@@ -23,5 +24,6 @@ router.get('/:id', function(req,res,next){
 	.then(function(result){
 		res.send(result);
 	})
+	.catch(next);
 });
 
