@@ -1,3 +1,43 @@
-<h1>Product Management Page</h1>
+<div class="container">
 
-{{products}}
+	<h1>Product Management Page</h1>
+	<div>
+
+	</div>
+
+	<div class="well">
+		<table st-table='displayProducts' st-safe-src='products' class='table table-striped'>
+			<thead>
+				<tr>
+					<th st-sort-ascent='productId' st-sort-default='true'>Product ID</th>
+					<th>Prduct Name</th>
+					<th>Prduct Brand</th>
+					<th>Prduct Type</th>
+					<th>Product Family</th>
+					<th>Prduct Price</th>
+					<th>Prduct Preview</th>
+					<th>Edit</th>
+				</tr>
+				<tr>
+					<th colspan='7'><input st-search='' class='form-control' placeholder='global search...' type='text'/></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat='product in displayProducts'>
+					<td>{{product.id}}</td>
+					<td>{{product.title}}</td>
+					<td>{{product.brand}}</td>
+					<td>{{product.type}}</td>
+					<td>{{product.family}}</td>
+					<td>{{product.price}}</td>
+					<td><img class='img-responsive' ng-src='{{product.image[0]}}' alt='product pic'/></td>
+					<td>
+						<button type='button' class='btn btn-sm btn-danger'>
+						<i class='glyphicon glyphicon-pencil'></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

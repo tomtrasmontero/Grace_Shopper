@@ -127,14 +127,14 @@ var seedOrders = function() {
 var seedInstruments = function() {
 
     var instruments = [];
-    for (let i = 0; i < numUsers; i++) {
+    for (let i = 0; i < numUsers+25; i++) {
 
         instruments.push({
             title: "title" + (i+1),
-            brand: "brand" + (i+1),
+            brand: "brand" + (Math.floor((Math.random() * 15) + 1)),
             price: (Math.random()*100.00).toFixed(2),
-            family: "family" + (i+1),
-            type: "type" + (i+1),
+            family: "family" + (Math.floor((Math.random() * 5) + 1)),
+            type: "type" + (Math.floor((Math.random() * 5) + 1)),
             description: faker.company.bs(),
             image: [faker.image.avatar(),faker.image.avatar(),faker.image.avatar()]
         });
