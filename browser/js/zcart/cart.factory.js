@@ -4,7 +4,7 @@ app.factory('ZCartFactory',function($http, $state){
 // 	var orders = [];
 // 	var theorder = {};
 // 	var order = {};
-// 	var cart = {};
+	var cart = {};
 
 // 	CartFactory.oneOfThree = function(status){
 // 		if (status === "shipped" || status === "cart" || status === "order")
@@ -53,7 +53,17 @@ app.factory('ZCartFactory',function($http, $state){
 
 // 		 	})
 // 	}
+	return {
+		addItem: function(id,qty){
+			console.log('in cart before', cart);
+			if(!cart.hasOwnProperty(id)){
+				cart[id] = qty;	
+			}else{
+				cart[id] = (cart[id] + qty);
+			}
+			console.log(cart);
+		}
 
-// 	return CartFactory;
+	};
 
-})
+});

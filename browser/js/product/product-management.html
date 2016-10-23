@@ -2,9 +2,12 @@
 
 	<h1>Product Management Page</h1>
 	<div>
-
+	Products per Page:
+		<input type='number' novalidate ng-trim='false' ng-model='viewPerPage' ng-min='10' ng-max='50' required>
+		<button type='button' class='btn btn-sm btn-primary' ng-click='changeView(viewPerPage)'>
+		<i class='glyphicon glyphicon-eye-open'></i>
+		</button>
 	</div>
-
 	<div class="well">
 		<table st-table='displayProducts' st-safe-src='products' class='table table-striped'>
 			<thead>
@@ -38,6 +41,14 @@
 					</td>
 				</tr>
 			</tbody>
+
+			<tfoot>
+				<tr>
+					<td colspan='5' class='text-center'>
+						<div st-pagination='' st-items-by-page='itemsPerPage' st-displayed-pages='5'></div>
+					</td>
+				</tr>		
+			</tfoot>
 		</table>
 	</div>
 </div>
