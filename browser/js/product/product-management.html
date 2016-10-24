@@ -2,13 +2,14 @@
 
 	<h1>Product Management Page</h1>
 	<div class='container'>
-	Products per Page:
+		<span>Products per Page:</span>
 		<select ng-model='viewPerPage' ng-init="viewPerPage=10" ng-options='val for val in views.values'>
 		</select>
 		<button type='button' class='btn btn-sm btn-primary' ng-click='changeView(viewPerPage)'>
 		<i class='glyphicon glyphicon-eye-open'></i>
 		</button>
 	</div>
+	<br>
 	<div class="well">
 		<table st-table='displayProducts' st-safe-src='products' class='table table-striped' st-sticky-header>
 			<thead style='opacity: 1;'>
