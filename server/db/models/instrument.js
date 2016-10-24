@@ -24,6 +24,10 @@ module.exports = db.define('instrument', {
     },
     image: {
         type: Sequelize.ARRAY(Sequelize.STRING)
+    },
+    quantity: {
+        type: Sequelize.INTEGER
     }
+
 });
 
