@@ -14,6 +14,7 @@ var Instrument = require('./models/instrument');
 User.hasMany(Address);
 User.hasMany(Review);
 User.hasMany(Order);
+Review.belongsTo(User);
 Order.belongsTo(User);
 Order.hasMany(OrderItem);
 Instrument.hasMany(Review);

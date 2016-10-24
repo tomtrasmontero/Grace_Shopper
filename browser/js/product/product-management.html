@@ -10,13 +10,13 @@
 		</button>
 	</div>
 	<div class="well">
-		<table st-table='displayProducts' st-safe-src='products' class='table table-striped'>
-			<thead>
+		<table st-table='displayProducts' st-safe-src='products' class='table table-striped' st-sticky-header>
+			<thead style='opacity: 1;'>
 				<tr>
-					<th st-sort-ascent='productId' st-sort-default='true'>Product ID</th>
-					<th>Prduct Name</th>
-					<th>Prduct Brand</th>
-					<th>Prduct Type</th>
+					<th>Product ID</th>
+					<th>Product Name</th>
+					<th>Product Brand</th>
+					<th>Product Type</th>
 					<th>Product Family</th>
 					<th>Product Price</th>
 					<th>Product Preview</th>
@@ -31,7 +31,7 @@
 					<td>{{product.id}}</td>
 					<td>{{product.title}}</td>
 					<td>{{product.brand}}</td>
-					<td>{{product.type}}</td>
+					<td >{{product.type}}</td>
 					<td>{{product.family}}</td>
 					<td>{{product.price}}</td>
 					<td><a ui-sref="productDetail({ id: {{product.id}} })">

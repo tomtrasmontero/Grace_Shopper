@@ -33,7 +33,7 @@
 				<h5>Title: {{review.title}}</h5>
 			</div>
 			<div class='panel-body'>
-				<p>User {{review.userId}} rated this a {{review.rating}} out of 5</p>
+				<p>User <a ui-sref="userProfile({id: review.user.id})">{{review.user.firstName}} {{review.user.lastName}}</a> rated this a {{review.rating}} out of 5</p>
 				<p>{{review.content}}</p>
 			</div>
 		</div>	
