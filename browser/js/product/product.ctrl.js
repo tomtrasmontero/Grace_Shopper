@@ -27,8 +27,11 @@ app.controller('productDetailCtrl', function($scope, $stateParams,$state,product
 app.controller('productMgmtCtrl', function($scope, products){
 	$scope.products = products;
 
+	$scope.views = { 
+		'values': [10,25,50]
+	};
+
 	$scope.changeView = function(num){
-		console.log(num);
 		$scope.itemsPerPage = num;
 	}
 

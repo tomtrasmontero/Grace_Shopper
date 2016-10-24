@@ -1,9 +1,10 @@
 <div class="container">
 
 	<h1>Product Management Page</h1>
-	<div>
+	<div class='container'>
 	Products per Page:
-		<input type='number' novalidate ng-trim='false' ng-model='viewPerPage' ng-min='10' ng-max='50' required>
+		<select ng-model='viewPerPage' ng-init="viewPerPage=10" ng-options='val for val in views.values'>
+		</select>
 		<button type='button' class='btn btn-sm btn-primary' ng-click='changeView(viewPerPage)'>
 		<i class='glyphicon glyphicon-eye-open'></i>
 		</button>
@@ -17,8 +18,8 @@
 					<th>Prduct Brand</th>
 					<th>Prduct Type</th>
 					<th>Product Family</th>
-					<th>Prduct Price</th>
-					<th>Prduct Preview</th>
+					<th>Product Price</th>
+					<th>Product Preview</th>
 					<th>Edit</th>
 				</tr>
 				<tr>
@@ -33,7 +34,8 @@
 					<td>{{product.type}}</td>
 					<td>{{product.family}}</td>
 					<td>{{product.price}}</td>
-					<td><img class='img-responsive' ng-src='{{product.image[0]}}' alt='product pic'/></td>
+					<td><a ui-sref="productDetail({ id: {{product.id}} })">
+						<img class='img-responsive' ng-src='{{product.image[0]}}' alt='product pic'/></a></td>
 					<td>
 						<button type='button' class='btn btn-sm btn-danger'>
 						<i class='glyphicon glyphicon-pencil'></i>
