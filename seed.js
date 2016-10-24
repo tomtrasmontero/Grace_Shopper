@@ -125,19 +125,22 @@ var seedOrders = function() {
 };
 
 var seedInstruments = function() {
-
+    function randomIt(min,max){
+        return Math.floor((Math.random() * max) + min);
+    };
     var instruments = [];
+    
     for (let i = 0; i < numUsers+25; i++) {
 
         instruments.push({
             title: "title" + (i+1),
-            brand: "brand" + (Math.floor((Math.random() * 15) + 1)),
+            brand: "brand" + randomIt(1,15),
             price: (Math.random()*100.00).toFixed(2),
-            family: "family" + (Math.floor((Math.random() * 5) + 1)),
-            type: "type" + (Math.floor((Math.random() * 5) + 1)),
+            family: "family" + randomIt(1,5),
+            type: ["type" + randomIt(1,5)],
             description: faker.company.bs(),
             image: [faker.image.avatar(),faker.image.avatar(),faker.image.avatar()],
-            quantity: (Math.floor((Math.random() * 99) + 1))
+            quantity: randomIt(1,99)
         });
     }
 

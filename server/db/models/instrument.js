@@ -16,7 +16,7 @@ module.exports = db.define('instrument', {
         type: Sequelize.STRING
     },
     type: {
-        type: Sequelize.STRING,
+        type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false
     },
     description: {
