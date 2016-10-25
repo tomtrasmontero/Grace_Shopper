@@ -15,12 +15,19 @@ app.config(function($stateProvider, $urlRouterProvider){
 						console.log (ZCartFactory.guestCart());
 						return ZCartFactory.guestCart();
 					}
+				},
+
+				isGuest: function(Session){
+					if (Session.user)
+						return true;
+					else return false;
 				}
 			},
-			controller: function(ZCartFactory, OrderFactory, $state, $scope, Session, order){ 
+			controller: function(ZCartFactory, OrderFactory, $state, $scope, Session, order, isGuest){ 
 
 				console.log("Session is ");
 				console.log (Session.user);
+				$scope.isGuest = isGuest;
 
 				// if (Session){
 				// 	ZCartFactory.getCart(Session.user.id)
