@@ -15,7 +15,7 @@ app.factory('productFactory', function($http){
 			.then(function(product){
 				return product.data;
 			});
-		}	
+		}
 
 	};
 });
