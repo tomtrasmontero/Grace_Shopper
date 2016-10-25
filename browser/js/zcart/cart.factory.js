@@ -70,6 +70,7 @@ app.factory('ZCartFactory',function($http, $state, Session){
 			return $http.get('/api/cart/cart/' + userId)
 				.then(function(result){
 					angular.copy(result.data, cart);
+					console.log ("length is " + cart.orderitems.length);
 					return result.data;
 				})
 		}
