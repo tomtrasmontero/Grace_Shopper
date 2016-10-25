@@ -1,31 +1,31 @@
 <div class = "container">
-	Order id: {{order.id}} </br>
-	User Email: {{order.user.email}}</br>
-	Order Placing Time is: {{order.createdAt}}</br>
+	<h4 class="small-title">Order id:</h4> <h5 class="content"> {{order.id}} </h5></br></br>
+	<h4 class="small-title">User Email:</h4> <h5 class="content">{{order.user.email}}</h5></br></br>
+	<h4 class="small-title">Order Placing Time is:</h4> <h5 class="content">{{order.createdAt}}</h5></br></br>
 	<form name='orderDetails' class='form-group'>
 			
 		<div ng-repeat = 'item in order.orderitems' class = "well">
 			<form name="item">
-				item name: {{item.instrument.title}} <input class = 'form-control' type='text' ng-model='item.quantity' >
-				subtotal is {{item.instrument.price * item.quantity}}</br>
+				<h4 class="search-title">item name: </h4><p class="big-strong">{{item.instrument.title}}</p> <input class = 'form-control' type='text' ng-model='item.quantity' >
+				<h4 class="search-title">subtotal is </h4><p class="big-strong">{{item.instrument.price * item.quantity | number: 2}}</p></br></br>
 				<button class="btn btn-danger" ng-click='changeQuantity(item.id, item.quantity, order.id)' ng-disabled = "item{{item.id}}.$invalid">change quantity</button>
 				<button class="btn btn-success" ng-click="deleteItem(item.id, $index, order.id)"> delete this item </button>
 			</form>
 		</div>
-		order status: (cart, order, shipped only)<input class = 'form-control' type = 'text'  ng-model = 'order.status'>
-		total: {{total}}
+		<h4 class="small-title">order status: (cart, order, shipped only)</h4><input class = 'form-control' type = 'text'  ng-model = 'order.status'></br>
+		<h4 class="small-title">total: </h4> <h1>${{total | number:2}} </h1></br>
 		
-		shipping info:
-		First Name: {{order.user.firstName}}</br>
-		Last Name: {{order.user.lastName}}</br>
-		phone:{{order.user.phone}}</br>
-		shipping address line 1: <input class = 'form-control' type = 'text'  ng-model = 'order.address.line1'>
-		shipping address line 2: <input class = 'form-control' type = 'text'  ng-model = 'order.address.line2'>
-		shipping city: <input class = 'form-control' type = 'text' ng-model = 'order.address.city'>
-		shipping state: <input class = 'form-control' type = 'text' ng-pattern = "/^(\w{2})$/" ng-model = 'order.address.state'>
-		shipping zipcode: (5 digit only!) <input class = 'form-control' type = 'text'  ng-model = 'order.address.zip' ng-pattern = "/^(\d{5})$/">
+		<h2 class="shipping-title"> shipping info:</h2></br>
+		<h4 class="small-title">First Name: </h4> <h5 class="content">{{order.user.firstName}}</h5></br></br>
+		<h4 class="small-title">Last Name:</h4> <h5 class="content">{{order.user.lastName}}</h5></br></br>
+		<h4 class="small-title">phone:</h4> <h5 class="content">{{order.user.phone}}</h5></br></br>
+		<h4 class="small-title">shipping address line 1:</h4> <input class = 'form-control' type = 'text'  ng-model = 'order.address.line1'></br>
+		<h4 class="small-title">shipping address line 2:</h4> <input class = 'form-control' type = 'text'  ng-model = 'order.address.line2'></br>
+		<h4 class="small-title">shipping city:</h4> <input class = 'form-control' type = 'text' ng-model = 'order.address.city'></br>
+		<h4 class="small-title">shipping state:</h4> <input class = 'form-control' type = 'text' ng-pattern = "/^(\w{2})$/" ng-model = 'order.address.state'></br>
+		<h4 class="small-title">shipping zipcode: (5 digit only!)</h4> <input class = 'form-control' type = 'text'  ng-model = 'order.address.zip' ng-pattern = "/^(\d{5})$/"></br>
 
-		shipping country: <input class = 'form-control' type = 'text'  ng-model = 'order.address.country'>
+		<h4 class="small-title">shipping country: </h4><input class = 'form-control' type = 'text'  ng-model = 'order.address.country'></br>
 		
 		<button class = "btn btn-warning" ng-click="submit()" ng-disabled="orderDetails.$invalid || !order.status.length || !order.address.line1.length || !order.address.city.length || !order.address.state.length || !order.address.zip.length || !order.address.country.length || !doesBelongTo()" >Change shipping info!</button>
 
