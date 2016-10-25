@@ -10,12 +10,25 @@ app.config(function($stateProvider, $urlRouterProvider){
 			},
 			controller: function(OrderFactory, $state, $scope, orders){
 				$scope.orders = orders;
+				$scope.total = 0;
 				$scope.page = 1;
 				$scope.numPerPage = 3;
 				$scope.displayOrders = $scope.orders.slice(0,$scope.numPerPage);
 				$scope.pageChanged = function(){
 					var startPos = ($scope.page-1) * $scope.numPerPage;
 					console.log($scope.page);
+				}
+
+				// $scope.addToTotal = function(n){
+				// 	$scope.total = $scope.total + n;
+				// }
+
+				$scope.displayTotal = function(order){
+					var total = 0;
+					for (let i = 0; i< order.orderitems.length; i++){
+						total = total + (order.orderitems[i].instrument.price * order.orderitems[i].quantity);
+					}
+					return total;
 				}
 
 				console.log ('scope order is ' + $scope.orders);

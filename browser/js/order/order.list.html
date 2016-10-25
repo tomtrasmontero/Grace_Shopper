@@ -1,34 +1,79 @@
 <div>
 
-	Filter by order id<input type="text" ng-model="search.orderId" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
+<!-- 	Filter by order id<input type="text" ng-model="search.orderId" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
 	Filter by user email<input type="text" ng-model="search.email" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
 	Filter by order status<input type="text" ng-model="search.status" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
 	Filter by state <input type="text" ng-model="search.state" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
 	Filter by city <input type="text" ng-model="search.city" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
 	Filter by zipcode<input type="text" ng-model="search.zipcode" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
-	Filter by country<input type="text" ng-model="search.country" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
+	Filter by country<input type="text" ng-model="search.country" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br> -->
 
-	<div ng-repeat='order in filterOrders = (orders | filter : {id: search.orderId} | filter : {status : search.status} | filter : {user: {email: search.email}} | filter : {address: {line1: search.line1}} | filter : {address: {state: search.state}} | filter : {address: {city: search.city}} | filter : {address: {zip: search.zipcode}} | filter : {address: {country: search.country}}   ) | limitTo: numPerPage:numPerPage * (page-1)' class = 'container well'>
-
-		Order id: {{order.id}} </br>
-		User Email: {{order.user.email}} </br>
-		Order status: {{order.status}} </br>
-		Order placing time: {{order.orderDate}} </br>
-		total amount: {{order.total}}
-		<div ng-repeat='item in order.orderitems'  class = 'alert alert-danger'>
-		{{item.instrument.title}} with a quantity of {{item.quantity}} and a subtotal of {{item.price}}
+	<div class ="row container center-block" >
+		<div class = "col-xs-12 col-md-4">
+			<h4 class="search-title">Filter by order id</h4><input type="text" ng-model="search.orderId" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
 		</div>
-		Shipping address: {{order.address.line1}} {{order.address.line2}} </br>
-		Shipping city: {{order.address.city}} </br>
-		Shipping state: {{order.address.state}} </br>
-		Shipping zipcode: {{order.address.zip}} </br>
-		Shipping country: {{order.address.country}} </br>
-
-		<button ui-sref='edit({id: order.id})' class = 'btn btn-danger'>Edit this order</button>
-		<button ng-click='delete(order.id)' class =' btn btn-success'> delete this order!</button>
+		<div class = "col-xs-12 col-md-4">
+			<h4 class="search-title">Filter by user email</h4><input type="text" ng-model="search.email" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
+		</div>
+		<div class = "col-xs-12 col-md-4">
+			<h4 class="search-title">Filter by order status</h4><input type="text" ng-model="search.status" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
+		</div>
+	</div>
+	<div class="row container center-block">
+		<div class = "col-xs-12 col-md-4">
+			<h4 class="search-title">Filter by state</h4> <input type="text" ng-model="search.state" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
+		</div>
+		<div class = "col-xs-12 col-md-4">
+			<h4 class="search-title">Filter by city</h4> <input type="text" ng-model="search.city" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
+		</div>
+		<div class = "col-xs-12 col-md-4">
+			<h4 class="search-title">Filter by zipcode</h4><input type="text" ng-model="search.zipcode" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
+		</div>
 	</div>
 
-	<ul uib-pagination class = "pagination-sm pagination" total-items="filterOrders.length" ng-model="page" items-per-page ="numPerPage" previous-text="&lsaquo" next-text="&rsaquo" ng-change="pageChange()"></ul>
+	<div class = "row container center-block">
+		<div class= "col-xs-12 col-md-4">
+			<h4 class="search-title">Filter by country</h4><input type="text" ng-model="search.country" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
+		</div>
+	</div>
 
+
+	<div class="container">
+		<table class="table table-striped">
+			<tr ng-repeat='order in filterOrders = (orders | filter : {id: search.orderId} | filter : {status : search.status} | filter : {user: {email: search.email}} | filter : {address: {line1: search.line1}} | filter : {address: {state: search.state}} | filter : {address: {city: search.city}} | filter : {address: {zip: search.zipcode}} | filter : {address: {country: search.country}}   ) | limitTo: numPerPage:numPerPage * (page-1)' class = 'row container well'>
+				<td>
+					<h4 class="small-title">Order id: </h4> <h5 class="content"> {{order.id}} </h5></br></br>
+					<h4 class="small-title">User Email: </h4> <h5 class="content">{{order.user.email}}</h5> </br></br>
+					<h4 class="small-title">Order status: </h4> <h5 class="content">{{order.status}}</h5> </br></br>
+					<h4 class="small-title">Order placing time: </h4> <h5 class="content">{{order.orderDate}}</h5> </br></br>
+					<h4 class="small-title">Total amount: </h4> <h5 class="content"> {{order.total}}</h5></br></br>
+					
+					<h4 class="small-title">Shipping address: </h4> <h5 class="content">{{order.address.line1}} {{order.address.line2}} </h5></br></br>
+					<h4 class="small-title">Shipping city: </h4> <h5 class="content">{{order.address.city}}</h5> </br></br>
+					<h4 class="small-title">Shipping state: </h4> <h5 class="content">{{order.address.state}} </h5></br></br>
+					<h4 class="small-title">Shipping zipcode: </h4> <h5 class="content">{{order.address.zip}} </h5></br></br>
+					<h4 class="small-title">Shipping country: </h4> <h5 class="content">{{order.address.country}} </h5></br></br>
+				</td>
+
+				<td>
+					<div ng-repeat='item in order.orderitems'  class = 'alert alert-danger'>
+						<p class="big-strong">{{item.instrument.title}}</p> with a quantity of <p class="big-strong">{{item.quantity}}</p> and a subtotal of <p class="big-strong">${{item.instrument.price * item.quantity | number:2}}</p>
+						
+			
+					</div>
+						<h4 class="small-title">Total amount: </h4> <h5 class="content"> {{displayTotal(order) | number:2}}</h5></br></br>
+
+
+					<button ui-sref='edit({id: order.id})' class = 'btn btn-danger'>Edit this order</button>
+					<button ng-click='delete(order.id)' class =' btn btn-success'> delete this order!</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="row container center-block">
+		<div class="col-xs-12 col-md-12">
+			<ul uib-pagination class = "pagination-sm pagination" total-items="filterOrders.length" ng-model="page" items-per-page ="numPerPage" previous-text="previous" next-text="next" ng-change="pageChange()"></ul>
+		</div>
+	</div>
 
 </div>
