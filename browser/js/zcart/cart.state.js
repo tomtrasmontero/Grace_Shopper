@@ -12,7 +12,9 @@ app.config(function($stateProvider, $urlRouterProvider){
 			controller: function(ZCartFactory, OrderFactory, $state, $scope, Session, order){
 				console.log (Session);
 				$scope.order = order;
+				console.log ("the order is !" + order);
 				console.log (order);
+				console.log ($scope.order.orderitems.length);
 
 				$scope.submit = function(){
 					ZCartFactory.updateOrder($scope.order);

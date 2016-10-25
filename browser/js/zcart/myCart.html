@@ -1,6 +1,13 @@
 My Cart is tasty!
 
-<div class = "container">
+<div ng-if = "!order.orderitems.length">
+	your car is boooooooo EMPTY!
+
+</div>
+
+
+
+<div ng-if = "order.orderitems.length" class = "container">
 
 My cart:
 	<div ng-repeat="item in order.orderitems" >
