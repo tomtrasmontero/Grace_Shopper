@@ -83,6 +83,18 @@ router.post('/additem/:id/:qty/:userid', function(req,res,next){
 		//.catch(next);
 })
 
+router.get('/addguestitem/:id', function(req,res,next){
+	Instrument.findOne({
+		where:{
+			id: req.params.id
+		}
+	})
+		.then(function(result){
+			res.send(result);
+		})
+		.catch(next);
+})
+
 router.put('/:id/:quantity', function(req,res,next){
 
 
