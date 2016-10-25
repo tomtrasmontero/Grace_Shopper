@@ -2,8 +2,8 @@ My Cart is tasty!
 
 <div ng-if = "!order.orderitems.length">
 	your car is boooooooo EMPTY!
-
 </div>
+
 
 
 
@@ -15,7 +15,7 @@ My cart:
 			{{item.instrument.title}}
 			<input class="form-control" type="text" ng-model = "item.quantity">
 			subtotal is {{item.instrument.price * item.quantity}}</br>
-			<button class="btn btn-danger" ng-click='changeQuantity(item.id, item.quantity, order.id)' ng-disabled = "item{{item.id}}.$invalid">change quantity</button>
+			<button class="btn btn-danger" ng-click='changeQuantity(item.id, item.quantity, order.id, $index)' ng-disabled = "item{{item.id}}.$invalid">change quantity</button>
 			<button class="btn btn-success" ng-click="deleteItem(item.id, $index, order.id)"> delete this item </button>
 		</form>
 	</div>

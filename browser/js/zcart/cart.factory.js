@@ -1,12 +1,19 @@
 app.factory('ZCartFactory',function($http, $state, Session){
 
+		if (!cart){
+			var cart = {};
+			cart.orderitems = [];
+		}
 
-	var cart = {};
+
 
 	
 
 
 	return {
+
+
+
 		addItem: function(id,qty){
 			// console.log('in cart before', cart);
 			// if(!cart.hasOwnProperty(id)){
@@ -15,12 +22,26 @@ app.factory('ZCartFactory',function($http, $state, Session){
 			// 	cart[id] = (cart[id] + qty);
 			// }
 			// console.log(cart);
-			return $http.post('/api/cart/additem/' + id + '/' + qty + '/' + Session.user.id)
-				.then(function(result){
-					console.log ("this is what we got " + result);
-					console.log(result);
-					//cart.push(result);
-				})
+
+			if (Session.user){
+				return $http.post('/api/cart/additem/' + id + '/' + qty + '/' + Session.user.id)
+					.then(function(result){
+						//console.log ("this is what we got " + result);
+						//console.log(result);
+						//cart.push(result);
+					})
+			}
+			else{
+				return $http.get('/api/cart/addguestitem/' + id)
+					.then(function(result){
+						console.log ("guest added this item");
+						console.log(result.data);
+						cart.orderitems.push({instrument:result.data, quantity:qty});
+						console.log ("cart is");
+						console.log (cart);
+					})
+			}
+
 
 
 		},
@@ -39,20 +60,36 @@ app.factory('ZCartFactory',function($http, $state, Session){
 			else return false;
 		},
 
-		changeOrderItem: function(id, quantity, index){
-			return $http.put('/api/cart/' + id + '/' + quantity)
-				.then(function(result){
-					return result.data;
-				})
+		changeOrderItem: function(id, quantity, index, orderitemIndex){
+			if (Session.user){
+				return $http.put('/api/cart/' + id + '/' + quantity)
+					.then(function(result){
+						return result.data;
+					})
+			}
+			else{
+				//console.log (1);
+				cart.orderitems[orderitemIndex].quantity = quantity;
+			}
+
 		},
 	
 		deleteItem: function(id, index, orderid){
 			console.log('aaa');
-			return $http.delete('/api/cart/orderitem/' + id)
-				.then(function(result){
+			if (Session.user){
+				return $http.delete('/api/cart/orderitem/' + id)
+					.then(function(result){
 
 
+					})
+			}
+			else{
+				var ind = cart.orderitems.findIndex(function(element){
+					return element.instrument.id == id;
 				})
+				cart.orderitems.splice(ind,1);
+			}
+
 		},
 
 
@@ -73,9 +110,11 @@ app.factory('ZCartFactory',function($http, $state, Session){
 					console.log ("length is " + cart.orderitems.length);
 					return result.data;
 				})
+		},
+
+		guestCart: function(){
+			return cart;
 		}
-
-
 
 
 	};
