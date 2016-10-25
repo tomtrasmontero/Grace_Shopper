@@ -8,13 +8,21 @@ app.factory('ZCartFactory',function($http, $state, Session){
 
 	return {
 		addItem: function(id,qty){
-			console.log('in cart before', cart);
-			if(!cart.hasOwnProperty(id)){
-				cart[id] = qty;	
-			}else{
-				cart[id] = (cart[id] + qty);
-			}
-			console.log(cart);
+			// console.log('in cart before', cart);
+			// if(!cart.hasOwnProperty(id)){
+			// 	cart[id] = qty;	
+			// }else{
+			// 	cart[id] = (cart[id] + qty);
+			// }
+			// console.log(cart);
+			return $http.post('/api/cart/additem/' + id + '/' + qty + '/' + Session.user.id)
+				.then(function(result){
+					console.log ("this is what we got " + result);
+					console.log(result);
+					//cart.push(result);
+				})
+
+
 		},
 
 		placeOrder: function(orderId){
