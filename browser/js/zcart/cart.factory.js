@@ -83,6 +83,20 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 				return _deleteItemRemotely(item);
 			else
 				return _deleteItemLocally(item);
+		},
+
+		syncCart: function() {
+			var cart = $window.sessionStorage.getItem('cart');
+			if (cart) {
+				cart = JSON.parse(cart);
+				$window.sessionStorage.removeItem('cart');
+				var promises = [];
+				cart.orderitems.forEach(function(orderitem) {
+					promises.push(_addItemRemotely(orderitem));
+				});
+				return $q.all(promises);
+			}
+
 		}
 
 	}
@@ -209,7 +223,13 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 })
 .run(function(ZCartFactory, $rootScope, AUTH_EVENTS) {
 	$rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
-		ZCartFactory.loadCart();
+		ZCartFactory.loadCart()
+		.then(function() {
+			return ZCartFactory.syncCart();
+		});
 	});
+	$rootScope.$on(AUTH_EVENTS.logoutSuccess, function() {
+		ZCartFactory.loadCart();
+	})
 	ZCartFactory.loadCart();
 })
