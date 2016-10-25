@@ -9,6 +9,79 @@ const Order = require('../../../db').models.order;
 const Address = require('../../../db').models.address;
 module.exports = router;
 
+router.post('/additem/:id/:qty/:userid', function(req,res,next){
+	Order.findOrCreate({
+		where:{
+			userId: req.params.userid,
+			status: 'cart'
+		}
+	})
+		.then(function(result){
+			console.log ('result is' + Object.keys(result[0]));
+			console.log ('result finally is ' + result[0].dataValues);
+			// OrderItem.create({
+				
+			// 		orderId: result[0].dataValues.id,
+			// 		quantity: req.params.qty,
+			// 		instrumentId: req.params.id,					 
+				
+			// })
+
+			OrderItem.findOrCreate({
+				where:{				
+					orderId: result[0].dataValues.id,
+					//quantity: req.params.qty,
+					instrumentId: req.params.id,
+				}
+					 				
+			})
+			
+
+			// 	.then(function(test){
+			// 		res.send(test);
+			// 	})
+			// })
+			
+
+
+
+				.then(function (theOrderItem){
+					if (theOrderItem[1] === false){
+						var newQty = Number(req.params.qty) + Number(theOrderItem[0].dataValues.quantity);
+
+						OrderItem.update({
+							quantity: newQty
+						},{
+							where: {id: theOrderItem[0].dataValues.id}
+						})
+							.then(function(orderItem){
+								res.send(orderItem);
+							})
+					}
+					else if (theOrderItem[1] === true){
+						OrderItem.update({
+							quantity: req.params.qty
+						},{
+							where: {id: theOrderItem[0].dataValues.id}
+						})
+							.then(function(orderItem){
+								res.send(orderItem);
+							})
+					}
+				})
+		})
+
+
+
+
+		// .then(function(orderItem){
+		// 	res.send(orderItem);
+		// })
+		// .then(function(result){
+		// 	console.log (result);
+		// })
+		//.catch(next);
+})
 
 router.put('/:id/:quantity', function(req,res,next){
 
