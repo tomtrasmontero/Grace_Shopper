@@ -1,11 +1,7 @@
 <div class='container'>
 	<div class='col-xs-2 col-md-6 pull-right'>
 		<ul>
-			<img class="img-responsive" style='width:80%;height:250px;padding:5px;' ' ng-src="{{product.image[0]}}"/>
-
-			<img class="img-responsive" style='width:80%;height:250px;padding:5px;' ' ng-src="{{product.image[1]}}"/>
-
-			<img class="img-responsive" style='width:80%;height:250px;padding:5px;' ' ng-src="{{product.image[2]}}"/>		
+			<img ng-repeat='picture in product.image' class="img-responsive" style='width:80%;height:250px;padding:5px;' ' ng-src="{{picture}}"/>	
 		</ul>
 	</div>	
 	
@@ -18,6 +14,7 @@
 			<li>Description:{{product.description}}</li>
 		</ul>
 		<h5>Buy it Now!</h5>
+		<h6>{{product.quantity}}</h6>
 		<ng-form name='orderProduct' novalidate>
 			Qty: <input type='number' required ng-model='product.quantity' ng-min='1' value='1'>
 			<button type='button' class='btn btn-md btn-success' ng-click='addInstrument(product.quantity,product.id)' ng-disabled='orderProduct.$invalid'>Add to Cart</button>
