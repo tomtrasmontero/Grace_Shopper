@@ -7,12 +7,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				return ZCartFactory.cart;
 			}
 		},
-		controller: function($scope, cart, ZCartFactory) {
+		controller: function($scope, cart, ZCartFactory, AuthService) {
 			$scope.cart = cart;
 
 			$scope.deleteItem = function(item){
 				ZCartFactory.deleteItem(item);
-			}
+			};
+
+			$scope.isLoggedIn = function () {
+			    return AuthService.isAuthenticated();
+			};
 		}
 	})
 })

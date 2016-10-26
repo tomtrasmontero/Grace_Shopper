@@ -17,7 +17,7 @@ My cart:
 			<button class="btn btn-success" ng-click="deleteItem(item)"> delete this item </button>
 		</form>
 	</div>
-	<div ng-if = "isGuest">
+	<div ng-if = "isLoggedIn()">
 		shipping info:</br>
 			<form name="shipping">
 				First Name: {{order.user.firstName}}</br>

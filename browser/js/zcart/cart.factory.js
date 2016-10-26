@@ -20,7 +20,7 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 	}
 
 	function _deleteItemRemotely(orderitem) {
-		return $http.delete('/api/cart/orderitem/' + orderitem.instrument.id)
+		return $http.delete('/api/cart/orderitem/' + orderitem.id)
 		.then(function() {
 			return _loadCartRemotely();
 		});
