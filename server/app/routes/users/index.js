@@ -14,7 +14,18 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
-router.get('/', ensureAuthenticated, function (req, res, next) {
+var ensureAdmin = function (req, res, next) {
+    var err;
+    if (req.user.type === "Admin") {
+        next();
+    } else {
+        err = new Error("You don\'t have permission to do that");
+        err.status = 401;
+        next(err);
+    }
+};
+
+router.get('/', ensureAuthenticated, ensureAdmin, function (req, res, next) {
     User.findAll()
     .then(function(users) {
         res.send(users);
