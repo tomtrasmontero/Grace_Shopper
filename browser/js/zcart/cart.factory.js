@@ -42,7 +42,8 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 	function _loadCartRemotely() {
 		return $http.get('/api/cart/cart/' + Session.user.id)
 		.then(function(results) {
-			angular.copy(results.data, _cart);
+			if(results.data)
+				angular.copy(results.data, _cart);
 			return _cart;
 		});
 	}
@@ -97,6 +98,10 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 				return $q.all(promises);
 			}
 
+		},
+
+		placeOrder: function(orderId){
+			return $http.post('/api/cart/place/' + orderId);
 		}
 
 	}
@@ -147,13 +152,13 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 
 	// 	},
 
-	// 	placeOrder: function(orderId){
-	// 		console.log(orderId);
-	// 		return $http.post('/api/cart/place/' + orderId)
-	// 		 	.then(function(result){
+		// placeOrder: function(orderId){
+		// 	console.log(orderId);
+		// 	return $http.post('/api/cart/place/' + orderId)
+		// 	 	.then(function(result){
 
-	// 		 	})
-	// 	},
+		// 	 	})
+		// },
 
 	// 	oneOfThree: function(status){
 	// 		if (status === "shipped" || status === "cart" || status === "order")
