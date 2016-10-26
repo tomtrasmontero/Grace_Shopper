@@ -7,7 +7,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				return ZCartFactory.cart;
 			}
 		},
-		controller: function($scope, cart, ZCartFactory, AuthService) {
+		controller: function($scope, $state, cart, ZCartFactory, AuthService) {
 			$scope.cart = cart;
 
 			$scope.deleteItem = function(item){
@@ -17,6 +17,20 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			$scope.isLoggedIn = function () {
 			    return AuthService.isAuthenticated();
 			};
+
+			$scope.placeOrder = function(){
+				ZCartFactory.placeOrder($scope.cart.id);
+				$state.go('confirmation', {orderid: cart.id});
+				ZCartFactory.loadCart();
+			}
+		}
+	})
+	.state('confirmation2', {
+		url:'/confirmation2/:orderid',
+		//params:['orderid'],
+		templateUrl:'/js/zcart/confirmation.html',
+		controller: function($scope, $state, $stateParams){
+			$scope.orderid = $stateParams.orderid;
 		}
 	})
 })
