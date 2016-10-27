@@ -30,6 +30,7 @@ app.controller('productMgmtCtrl', function($scope, products){
 		$scope.itemsPerPage = num;
 	}
 
+
 	$scope.addNewItem = function(newProduct){
 		console.log(newProduct);
 	}
