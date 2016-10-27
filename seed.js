@@ -47,7 +47,16 @@ var seedUsers = function () {
             phone: '888-888-8888',
             type: 'Admin',
             avatar: faker.image.avatar()
-        }
+        },
+
+        {
+            email: 'bush@gmail.com',
+            password: 'potus',
+            firstName: 'Bill',
+            lastName: 'Clinton',
+            phone: '888-888-8887',
+            avatar: faker.image.avatar()
+        },        
     ];
 
     for (let i = 0; i < numUsers - 1; i++) {
