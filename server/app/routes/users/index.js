@@ -1,29 +1,12 @@
 'use strict';
 var router = require('express').Router(); // eslint-disable-line new-cap
 var User = require('../../../db').models.user;
+var auth = require('../auth');
+var ensureAuthenticated = auth.ensureAuthenticated;
+var ensureAdmin = auth.ensureAdmin;
 module.exports = router;
 
-var ensureAuthenticated = function (req, res, next) {
-    var err;
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        err = new Error('You must be logged in.');
-        err.status = 401;
-        next(err);
-    }
-};
 
-var ensureAdmin = function (req, res, next) {
-    var err;
-    if (req.user.type === "Admin") {
-        next();
-    } else {
-        err = new Error("You don\'t have permission to do that");
-        err.status = 401;
-        next(err);
-    }
-};
 
 router.get('/', ensureAuthenticated, ensureAdmin, function (req, res, next) {
     User.findAll()
@@ -33,6 +16,11 @@ router.get('/', ensureAuthenticated, ensureAdmin, function (req, res, next) {
 });
 
 router.get('/:id', ensureAuthenticated, function(req, res, next) {
+    if (req.user.id !== Number(req.params.id) && req.user.type !== "Admin") {
+        var err = new Error("Permission denied");
+        err.status = 401;
+        return next(err);
+    }
     User.findById(req.params.id)
     .then(function(user) {
         res.send(user);
