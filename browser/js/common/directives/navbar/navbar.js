@@ -11,11 +11,11 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             scope.items = [
                 { label: 'Home', state: 'home' },
                 { label: 'Products', state: 'product' },
-                { label: 'User Management', state: 'userMgmt', auth: true },
-                { label: 'Product Management', state: 'productMgmt', auth: true },
-                { label: 'Order Management', state: 'orderlist', auth: true },
+                { label: 'User Management', state: 'userMgmt', auth: "admin" },
+                { label: 'Product Management', state: 'productMgmt', auth: "admin" },
+                { label: 'Order Management', state: 'orderlist', auth: "admin" },
                 { label: 'My Cart', state: 'cart'},
-                { label: 'My Profile', state: 'userProfile({id: user.id})', auth: true }
+                { label: 'My Profile', state: 'userProfile({id: user.id})', auth: "user" }
             ];
 
             scope.user = null;
@@ -23,6 +23,10 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
             };
+
+            scope.isAuthorized = function(type) {
+                return AuthService.isAuthorized(type);
+            }
 
             scope.logout = function () {
                 AuthService.logout().then(function () {
