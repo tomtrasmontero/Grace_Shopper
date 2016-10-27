@@ -63,6 +63,13 @@
             return !!Session.user;
         };
 
+        this.isAuthorized = function(type) {
+            if (type === "user")
+                return !!Session.user;
+            else if (type === "admin")
+                return Session.user && Session.user.type === "Admin";
+        }
+
         this.getLoggedInUser = function (fromServer) {
 
             // If an authenticated session exists, we

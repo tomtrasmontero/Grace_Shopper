@@ -16,9 +16,8 @@ app.controller('productDetailCtrl', function($scope, $stateParams,$state,product
 	$scope.reviews = product.reviews;
 	$scope.product.quantity = 1;
 
-	$scope.addInstrument = function(productQty,productId){
-		console.log(productQty,productId);
-		ZCartFactory.addItem(parseInt(productId),parseInt(productQty));
+	$scope.addInstrument = function(product){
+		ZCartFactory.addItem({instrument: product, quantity: product.quantity});
 	};
 
 });

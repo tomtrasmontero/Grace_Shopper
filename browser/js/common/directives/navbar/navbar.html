@@ -4,8 +4,11 @@
             <fullstack-logo></fullstack-logo>
         </div>
         <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
+            <li ng-repeat="item in items" ng-show="!item.auth || isAuthorized(item.auth)">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+            </li>
+            <li>
+                <a ui-sref-active="active" ui-sref="cart2">Cart2({{ cart.orderitems.length }})</a>
             </li>
         </ul>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
