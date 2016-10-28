@@ -31,3 +31,22 @@ router.get('/:id', function(req,res,next){
 	.catch(next);
 });
 
+router.post('/add', function(req,res,next){
+	Instrument.create({
+		title: req.body.name,
+		brand: req.body.brand,
+		family: req.body.family,
+		type: [req.body.type],
+		description: req.body.description,
+		price: req.body.price,
+		quantity: req.body.quantity
+	})
+	.then(function(){
+		return Instrument.findAll()
+	})
+	.then(function(instruments){
+		res.send(instruments)
+	})
+	.catch(next);
+});
+
