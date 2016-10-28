@@ -50,7 +50,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 					return OrderFactory.getOne($stateParams.id);
 				}
 			},
-			controller: function(OrderFactory, $state, $scope, order, $stateParams, Session){
+			controller: function(OrderFactory, $state, $scope, order, $stateParams, Session, $rootScope){
 				//OrderFactory.getOne($stateParams.id);
 				$scope.order = order;
 				console.log("the id is " + Session.user.id);
@@ -60,11 +60,31 @@ app.config(function($stateProvider, $urlRouterProvider){
 				console.log (order);
 				console.log (OrderFactory.theorder);
 				$scope.total = 0;
+
+
 				for (var i =0; i<$scope.order.orderitems.length; i++){
 					$scope.total = $scope.total + ($scope.order.orderitems[i].instrument.price * $scope.order.orderitems[i].quantity);
 				}
 
+				$scope.displayTotal = function(order){
+					var total = 0;
+					for (let i = 0; i< order.orderitems.length; i++){
+						total = total + (order.orderitems[i].instrument.price * order.orderitems[i].quantity);
+					}
+					return total;
+				}
 
+				// $scope.showTotal = function(){
+				// 	// var total = 0;
+				// 	// for (let i = 0; i< $scope.order.orderitems.length; i++){
+				// 	// 	total = total + ($scope.order.orderitems[i].instrument.price * $scope.order.orderitems[i].quantity);
+				// 	// }
+				// 	return 1;
+				// }
+
+				// $scope.test = function(){
+				// 	return "aaa"
+				// }
 
 				$scope.doesBelongTo = function(){
 					var oneOfThree = OrderFactory.oneOfThree($scope.order.status);
@@ -73,6 +93,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 
 				$scope.changeQuantity = function(itemid, quantity, orderid){
 					OrderFactory.changeOrderItem(itemid, quantity, orderid);
+
 
 				}
 

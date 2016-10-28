@@ -46,6 +46,7 @@ app.factory('OrderFactory',function($http, $state){
 	OrderFactory.changeOrderItem = function(id, quantity, index){
 		return $http.put('/api/order/' + id + '/' + quantity)
 			.then(function(result){
+				console.log("after changed quantity");
 				return result.data;
 			})
 	}

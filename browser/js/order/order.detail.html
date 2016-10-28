@@ -13,7 +13,7 @@
 			</form>
 		</div>
 		<h4 class="small-title">order status: (cart, order, shipped only)</h4><input class = 'form-control' type = 'text'  ng-model = 'order.status'></br>
-		<h4 class="small-title">total: </h4> <h1>${{total | number:2}} </h1></br>
+		<h4 class="small-title">total: </h4> <h1>${{displayTotal(order) | number:2}}</h1></br>
 		
 		<h2 class="shipping-title"> shipping info:</h2></br>
 		<h4 class="small-title">First Name: </h4> <h5 class="content">{{order.user.firstName}}</h5></br></br>
