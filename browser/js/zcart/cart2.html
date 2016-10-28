@@ -17,23 +17,61 @@ My cart:
 			<button class="btn btn-success" ng-click="deleteItem(item)"> delete this item </button>
 		</form>
 	</div>
+
+
+
 	<div ng-if = "isLoggedIn()">
+
+		<form name="addShipping">
+				shipping address line 1: <input class = 'form-control' type = 'text'  ng-model = 'newAddress.line1'>
+				shipping address line 2: <input class = 'form-control' type = 'text'  ng-model = 'newAddress.line2'>
+				shipping city: <input class = 'form-control' type = 'text' ng-model = 'newAddress.city'>
+				shipping state: <input class = 'form-control' type = 'text' ng-model = 'newAddress.state'>
+				shipping zipcode: (5 digit only!) <input class = 'form-control' type = 'text'  ng-model = 'newAddress.zip' ng-pattern = "/^(\d{5})$/">
+
+				shipping country: <input class = 'form-control' type = 'text'  ng-model = 'newAddress.country'>
+				
+				<button class = "btn btn-warning" ng-click="submitAddress()" ng-disabled="shipping.$invalid" >Add this new address!</button>
+		</form>
+
+
+		Please select a shipping address!
+
+			<div ng-repeat="address in cart.user.addresses" class="row">
+				<label>
+					<input type="radio" ng-model="cart.address" ng-value="address" class="radio-inline">
+					{{address.line1}}  {{address.line2}}</br>
+					&nbsp&nbsp&nbsp&nbsp{{address.city}}, {{address.state}}  {{address.zip}}
+				</label>
+				<button ng-click="deleteAddress(address.id)" class = "action-button shadow animate blue col-xs-6 col-md-6 pull-right">Delete this Address!</button></br>
+			</div>
+
+
+<!-- 				<label ng-repeat="address in cart.user.addresses">
+					<input type="radio" ng-model="cart.address" ng-value="address">
+					{{address.line1}}  {{address.line2}}<br>
+					{{address.city}}, {{address.state}}  {{address.zip}}</br>
+				</label></br>
+ -->
+
+
+
+
 		shipping info:</br>
 			<form name="shipping">
-				First Name: {{order.user.firstName}}</br>
-				Last Name: {{order.user.lastName}}</br>
-				phone:{{order.user.phone}}</br>
-				shipping address line 1: <input class = 'form-control' type = 'text'  ng-model = 'order.address.line1'>
-				shipping address line 2: <input class = 'form-control' type = 'text'  ng-model = 'order.address.line2'>
-				shipping city: <input class = 'form-control' type = 'text' ng-model = 'order.address.city'>
-				shipping state: <input class = 'form-control' type = 'text' ng-pattern = "/^(\w{2})$/" ng-model = 'order.address.state'>
-				shipping zipcode: (5 digit only!) <input class = 'form-control' type = 'text'  ng-model = 'order.address.zip' ng-pattern = "/^(\d{5})$/">
-
-				shipping country: <input class = 'form-control' type = 'text'  ng-model = 'order.address.country'>
+				First Name: {{cart.user.firstName}}</br>
+				Last Name: {{cart.user.lastName}}</br>
+				phone:{{cart.user.phone}}</br>
+				shipping address line 1: {{cart.address.line1}}</br>
+				shipping address line 2: {{cart.address.line2}}</br>
+				shipping city: {{cart.address.city}}</br>
+				shipping state: {{cart.address.state}}</br>
+				shipping zipcode: {{cart.address.zip}}</br>
+				shipping country: {{cart.address.country}}</br>
 				
-				<button class = "btn btn-warning" ng-click="submit()" ng-disabled="shipping.$invalid || !order.address.line1.length || !order.address.city.length || !order.address.state.length || !order.address.zip.length || !order.address.country.length" >Submit changes!</button>
+<!-- 				<button class = "btn btn-warning" ng-click="submit()" ng-disabled="shipping.$invalid || !order.address.line1.length || !order.address.city.length || !order.address.state.length || !order.address.zip.length || !order.address.country.length" >Submit changes!</button> -->
 
-				<button class = "btn btn-primary" ng-click="placeOrder()" ng-disabled="shipping.$invalid || !order.address.line1.length || !order.address.city.length || !order.address.state.length || !order.address.zip.length || !order.address.country.length" >Place this Order!</button>
+				<button class = "btn btn-primary" ng-click="placeOrder()" ng-disabled="order.address" >Place this Order!</button>
 			</form>
 	</div>
 

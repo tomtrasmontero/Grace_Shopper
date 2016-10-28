@@ -1,12 +1,42 @@
 app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 
 	var _cart = {
-		orderitems: []
+		orderitems: [],
 	};
+
+	function _changeOrderItem(id, quantity, index, orderitemIndex){
+		if (Session.user){
+			return $http.put('/api/cart/' + id + '/' + quantity)
+				.then(function(result){
+					return result.data;
+				})
+		}
+		else{
+			cart.orderitems[orderitemIndex].quantity = quantity;
+		}
+	} //need more work here
+
+
+
+
+	function _submitAddress(address, userid){
+		return $http.post('/api/cart/address/' + userid, address)
+			.then(function(){
+				return _loadCartRemotely();
+			})
+	}
+
+	function _deleteAddress(id){
+		return $http.delete('/api/cart/address/' + id)
+			.then(function(){
+				return _loadCartRemotely();
+			})
+	}
+
 
 	function _addItemRemotely(orderitem) {
 		return $http.post('/api/cart/additem/' + orderitem.instrument.id + '/' + orderitem.quantity + '/' + Session.user.id)
-		.then(function() {
+		.then(function() {	
 			return _loadCartRemotely();
 		});
 	}
@@ -42,8 +72,9 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 	function _loadCartRemotely() {
 		return $http.get('/api/cart/cart/' + Session.user.id)
 		.then(function(results) {
-			if(results.data)
+			if(results.data){
 				angular.copy(results.data, _cart);
+			}
 			return _cart;
 		});
 	}
@@ -100,9 +131,16 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 
 		},
 
-		placeOrder: function(orderId){
-			return $http.post('/api/cart/place/' + orderId);
-		}
+		placeOrder: function(orderId, addressId){
+			return $http.post('/api/cart/place/' + orderId + '/' + addressId);
+		},
+
+
+		submitAddress: _submitAddress,
+
+		deleteAddress: _deleteAddress,
+
+		changeOrderItem: _changeOrderItem,
 
 	}
 
