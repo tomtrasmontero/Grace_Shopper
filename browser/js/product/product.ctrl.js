@@ -19,7 +19,7 @@ app.controller('productDetailCtrl', function($scope, $stateParams,$state,product
 });
 
 //Product Managment controller
-app.controller('productMgmtCtrl', function($scope, products){
+app.controller('productMgmtCtrl', function($scope, products,productFactory){
 	$scope.products = products;
 
 	$scope.views = { 
@@ -28,10 +28,14 @@ app.controller('productMgmtCtrl', function($scope, products){
 
 	$scope.changeView = function(num){
 		$scope.itemsPerPage = num;
-	}
+	};
 
 	$scope.addNewItem = function(newProduct){
-		console.log(newProduct);
-	}
+		productFactory.addProduct(newProduct)
+		.then(function(result){
+			$scope.products = result;
+			console.log('parsing');
+		});
+	};
 
 });
