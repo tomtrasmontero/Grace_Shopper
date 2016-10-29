@@ -10,11 +10,15 @@
                 
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn btn-default">Login</button>
         <div class="welcome">
             <span>Welcome{{!user? "": ", " + user.firstName}}!</span>
-            <a class="logout" ng-show="!!user" ng-click ="logout()">Logout</a>
+            <a ng-show="!!user" ng-click ="logout()">Logout</a>
+            <span ng-show="!user">
+            <a ui-sref="login">Login</a> or <a>Register</a>
+            </span>
+            <span>
             <a ui-sref-active="active" ui-sref="cart" class="glyphicon glyphicon-shopping-cart">({{ cart.orderitems.length }})</a>
+            </span>
         </div>
 
     </div>
