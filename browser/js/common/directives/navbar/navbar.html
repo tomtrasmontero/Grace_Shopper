@@ -1,7 +1,6 @@
-<nav class="navbar navbar-static-top">
-    <div class="container">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <fullstack-logo></fullstack-logo>
         </div>
         <ul class="nav navbar-nav">
             <li ng-repeat="item in items" ng-show="!item.auth || isAuthorized(item.auth)">
@@ -11,10 +10,10 @@
                 <a ui-sref-active="active" ui-sref="cart2">Cart2({{ cart.orderitems.length }})</a>
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
-            <a ng-click="logout()">Logout</a>
+        <button ng-show="!user" ui-sref="login" class="btn btn-default">Login</button>
+        <div class="welcome">
+            <span>Welcome{{!user? "": ", " + user.firstName}}!</span>
+            <a ng-show="!!user" ng-click ="logout()">Logout</a>
         </div>
     </div>
 </nav>
