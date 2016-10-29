@@ -14,7 +14,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
                 { label: 'User Management', state: 'userMgmt', auth: "admin" },
                 { label: 'Product Management', state: 'productMgmt', auth: "admin" },
                 { label: 'Order Management', state: 'orderlist', auth: "admin" },
-                { label: 'My Cart', state: 'cart'},
                 { label: 'My Profile', state: 'userProfile({id: user.id})', auth: "user" }
             ];
 
