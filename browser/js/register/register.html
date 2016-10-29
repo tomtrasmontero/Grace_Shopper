@@ -1,0 +1,24 @@
+<form id="login-form" name="registerForm" ng-submit="registerForm.$valid && sendInfo(info)">
+
+    <div class="form-group">
+        <label for="first-name">First Name</label>
+        <input type="text" ng-model="info.firstName" class="form-control" id="first-name" placeholder="Enter first name">
+    </div>
+    <div class="form-group">
+        <label for="last-name">Last Name</label>
+        <input type="text" ng-model="info.lastName" class="form-control" id="last-name" placeholder="Enter last name">
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" ng-model="info.phone" class="form-control" id="first-name" placeholder="Enter phone number">
+    </div>
+    <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="text" ng-model="info.email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="register-password">Password</label>
+        <input type="password" ng-model="info.password" class="form-control" id="register-password" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
