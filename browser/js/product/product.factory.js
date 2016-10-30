@@ -1,5 +1,5 @@
 app.factory('productFactory', function($http){
-	var products = [];
+	var products = []
 	return {
 		getAll: function(){
 			return $http.get('/api/product')

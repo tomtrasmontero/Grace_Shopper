@@ -14,7 +14,6 @@
 			<li>Description:{{product.description}}</li>
 		</ul>
 		<h5>Buy it Now!</h5>
-		<h6>{{product.quantity}}</h6>
 		<ng-form name='orderProduct' novalidate>
 			Qty: <input type='number' required ng-model='product.quantity' ng-min='1' value='1'>
 			<button type='button' class='btn btn-md btn-success' ng-click='addInstrument(product)' ng-disabled='orderProduct.$invalid'>Add to Cart</button>
