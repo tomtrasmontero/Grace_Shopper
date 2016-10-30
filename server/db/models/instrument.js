@@ -4,23 +4,28 @@ var db = require('../_db');
 
 module.exports = db.define('instrument', {
 	title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     brand: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false        
     },
     price: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        allowNull: false
     },
     family: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     type: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+        type: Sequelize.STRING,
         allowNull: false
     },
     description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     image: {
         type: Sequelize.ARRAY(Sequelize.STRING)

@@ -1,6 +1,7 @@
 app.directive('productEdit', function(){
 	return {
 		restrict: 'E',
+		controller: 'productEditCtrl',
 		scope:{
 			product: '='
 		},
