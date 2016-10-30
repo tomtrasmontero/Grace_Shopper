@@ -60,6 +60,27 @@ router.get('/:id', function(req,res,next){
 	.catch(next);
 });
 
+router.put('/edit', function(req,res,next){
+	console.log(req.body);
+	Instrument.update(
+	{
+		title: req.body.title,
+		brand: req.body.brand,
+		price: req.body.price,
+		family: req.body.family,
+		type: req.body.type,
+		description: req.body.description,
+		quantity: req.body.quantity,
+		image: req.body.image
+	},{
+		where: {id: req.body.id}
+	})
+	.then(function(){
+		res.sendStatus(200);
+	})
+	.catch(next);
+});
+
 
 
 

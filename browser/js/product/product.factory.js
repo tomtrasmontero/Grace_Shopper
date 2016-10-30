@@ -1,6 +1,11 @@
 app.factory('productFactory', function($http){
-	var products = []
+	var products = [];
+	
 	return {
+		editImg: function(img,idx){
+			img.splice(idx,1);
+		},
+
 		getAll: function(){
 			return $http.get('/api/product')
 			.then(function(result){
@@ -22,6 +27,9 @@ app.factory('productFactory', function($http){
 				angular.copy(result.data, products);
 				return products;
 			});
+		},
+		editProduct: function(product){
+			return $http.put('/api/product/edit', product);		
 		}
 
 	};

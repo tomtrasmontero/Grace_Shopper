@@ -45,11 +45,18 @@ app.controller('productMgmtCtrl', function($scope, products,productFactory,$stat
 });
 
 //Products Edit controller
-app.controller('productEditCtrl', function($scope,$state){
+app.controller('productEditCtrl', function($scope,$state, productFactory){
 	$scope.product = $state.params.myProduct;
 
-	$scope.edit = function(test){
-		console.log(test,'im in edit');
-	}
+	$scope.edit = function(product){
+		productFactory.editProduct(product)
+		.then(function(){
+			console.log('object updated')
+		})
+	};
+
+	$scope.deleteImg = function(idx){
+		productFactory.editImg($scope.product.image,idx)
+	};
 	
 });

@@ -1,6 +1,7 @@
 <div class='container'>
+{{product}}
 	<span class='h1'>Product Management Edit Page</span>
-	<form editable-form name='editableForm' onaftersave='edit()'>
+	<form editable-form name='editableForm' onaftersave='edit(product)'>
 		<button type='button' class='btn btn-info' ng-click='editableForm.$show()' ng-show='!editableForm.$visible'>Edit</button>
 		<span ng-show='editableForm.$visible'>
 			<button type='submit' class='btn btn-primary' ng-disabled='editableForm.$waiting'>Save</button>
@@ -25,10 +26,6 @@
 			<span class='title text-center' editable-text='product.type'>{{product.type}}</span>	
 		</div>
 		<div class='col-md-5'>
-			<span class='title'> Product Description: </span>
-			<span class='title text-center' editable-textarea='product.description'>{{product.description}}</span>	
-		</div>
-		<div class='col-md-5'>
 			<span class='title'> Product Quantity: </span>
 			<span class='title text-center' editable-text='product.quantity'>{{product.quantity}}</span>	
 		</div>
@@ -36,7 +33,10 @@
 			<span class='title'> Product Price: </span>
 			<span class='title text-center' editable-text='product.price'>{{product.price}}</span>	
 		</div>
-
+		<div class='col-md-5'>
+			<span class='title'> Product Description: </span>
+			<span class='title text-center' editable-textarea='product.description'>{{product.description}}</span>	
+		</div>		
 	</form>
 </div>
 <br>
@@ -46,7 +46,7 @@
 	</div>
 	<br>	
 	<div ng-repeat='picture in product.image track by $index' class='col-md-4'>
-		<button type='button' class='btn btn-sm btn-danger' ng-click="deleteImg(product.id,$index)">
+		<button type='button' class='btn btn-sm btn-danger' ng-click="deleteImg($index)">
 		<i class='glyphicon glyphicon-trash pull-right'></i>
 		</button>
 		<img class='img-responsive' style='width:80%;height:250px;padding:5px;' ng-src="{{picture}}"/>
