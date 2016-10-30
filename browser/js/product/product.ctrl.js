@@ -19,7 +19,7 @@ app.controller('productDetailCtrl', function($scope, $stateParams,$state,product
 });
 
 //Product Managment controller
-app.controller('productMgmtCtrl', function($scope, products,productFactory){
+app.controller('productMgmtCtrl', function($scope, products,productFactory,$state){
 	$scope.products = products;
 
 	$scope.views = { 
@@ -34,8 +34,19 @@ app.controller('productMgmtCtrl', function($scope, products,productFactory){
 		productFactory.addProduct(newProduct)
 		.then(function(result){
 			$scope.products = result;
-			console.log('parsing');
 		});
 	};
 
+	$scope.editProduct = function(product){
+		console.log(product, 'in mgmt ctrl');
+		$state.go('productMgmtEdit', {myProduct: product});
+	};
+
+});
+
+//Products Edit controller
+app.controller('productEditCtrl', function($scope,$state){
+	console.log($state, 'in edit ctrl');
+	$scope.product = $state.params.myProduct;
+	
 });
