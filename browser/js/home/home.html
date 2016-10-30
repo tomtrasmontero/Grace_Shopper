@@ -3,5 +3,14 @@
     	<h1>The Best Stuff</h1>
     	<p class="lead">Come check out our stuff if you want that goodness. For real, our stuff is like out of control it's so good.</p>
     	<a class="btn btn-large btn-success" ui-sref="product">Start Shopping!</a>
+	</div>
+	<div class="container" ng-hide="!!user && user.orders.length">
+	<h2>Best Sellers</h2>
+		<div class='col-xs-9'>	
+			<ul class='list-group'>
+				<data-product-card ng-repeat='instrument in bestSellers' product="instrument"></data-product-card>	
+			</ul>
+			<br clear='all'>
 		</div>
+	</div>
 </section>
