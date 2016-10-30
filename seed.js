@@ -146,7 +146,7 @@ var seedInstruments = function() {
             brand: "brand" + randomIt(1,15),
             price: (Math.random()*100.00).toFixed(2),
             family: "family" + randomIt(1,5),
-            type: ["type" + randomIt(1,5)],
+            type: "type" + randomIt(1,5),
             description: faker.company.bs(),
             image: [faker.image.avatar(),faker.image.avatar(),faker.image.avatar()],
             quantity: randomIt(1,99)

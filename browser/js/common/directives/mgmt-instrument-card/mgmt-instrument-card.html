@@ -1,4 +1,54 @@
 <div class='container'>
-<h1>Product Management Edit Page</h1>
-{{product}}
+	<span class='h1'>Product Management Edit Page</span>
+	<form editable-form name='editableForm' onaftersave='edit()'>
+		<button type='button' class='btn btn-info' ng-click='editableForm.$show()' ng-show='!editableForm.$visible'>Edit</button>
+		<span ng-show='editableForm.$visible'>
+			<button type='submit' class='btn btn-primary' ng-disabled='editableForm.$waiting'>Save</button>
+			<button type='button' class='btn btn-default' ng-disabled='editableForm.$waiting' ng-click='editableForm.$cancel()'>Cancel</button>
+		</span>		
+		<br clear='all'>
+	
+		<div class='col-md-5'>
+			<span class='title'> Product Name: </span>
+			<span class='title text-center' editable-text='product.title'>{{product.title}}</span>	
+		</div>
+		<div class='col-md-5'>
+			<span class='title'> Product Brand: </span>
+			<span class='title text-center' editable-text='product.brand'>{{product.brand}}</span>	
+		</div>	
+		<div class='col-md-5'>
+			<span class='title'> Product Family: </span>
+			<span class='title text-center' editable-text='product.family'>{{product.family}}</span>	
+		</div>
+		<div class='col-md-5'>
+			<span class='title'> Product Type: </span>
+			<span class='title text-center' editable-text='product.type'>{{product.type}}</span>	
+		</div>
+		<div class='col-md-5'>
+			<span class='title'> Product Description: </span>
+			<span class='title text-center' editable-textarea='product.description'>{{product.description}}</span>	
+		</div>
+		<div class='col-md-5'>
+			<span class='title'> Product Quantity: </span>
+			<span class='title text-center' editable-text='product.quantity'>{{product.quantity}}</span>	
+		</div>
+		<div class='col-md-5'>
+			<span class='title'> Product Price: </span>
+			<span class='title text-center' editable-text='product.price'>{{product.price}}</span>	
+		</div>
+
+	</form>
 </div>
+<br>
+<div class='container well'>
+	<div>
+	<input type='button' class='btn btn-success' value='Add Photo'/>
+	</div>
+	<br>	
+	<div ng-repeat='picture in product.image track by $index' class='col-md-4'>
+		<button type='button' class='btn btn-sm btn-danger' ng-click="deleteImg(product.id,$index)">
+		<i class='glyphicon glyphicon-trash pull-right'></i>
+		</button>
+		<img class='img-responsive' style='width:80%;height:250px;padding:5px;' ng-src="{{picture}}"/>
+	</div>
+</div>	

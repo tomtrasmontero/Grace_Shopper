@@ -46,7 +46,10 @@ app.controller('productMgmtCtrl', function($scope, products,productFactory,$stat
 
 //Products Edit controller
 app.controller('productEditCtrl', function($scope,$state){
-	console.log($state, 'in edit ctrl');
 	$scope.product = $state.params.myProduct;
+
+	$scope.edit = function(test){
+		console.log(test,'im in edit');
+	}
 	
 });
