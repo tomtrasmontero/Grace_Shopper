@@ -1,6 +1,7 @@
 'use strict';
 var router = require('express').Router(); // eslint-disable-line new-cap
 var User = require('../../../db').models.user;
+var Order = require('../../../db').models.order;
 var auth = require('../auth');
 var ensureAuthenticated = auth.ensureAuthenticated;
 var ensureAdmin = auth.ensureAdmin;
@@ -21,7 +22,9 @@ router.get('/:id', ensureAuthenticated, function(req, res, next) {
         err.status = 401;
         return next(err);
     }
-    User.findById(req.params.id)
+    User.findById(req.params.id, {
+        include: [Order]
+    })
     .then(function(user) {
         res.send(user);
     });
