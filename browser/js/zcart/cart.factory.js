@@ -16,7 +16,15 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 		}
 	} //need more work here
 
-
+	function _emptyCart() {
+		var cart = {
+			orderitems: []
+		};
+		angular.copy(cart, _cart);
+		var dfd = $q.defer();
+		dfd.resolve(_cart);
+		return dfd.promise;
+	}
 
 
 	function _submitAddress(address, userid){
@@ -132,7 +140,14 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 		},
 
 		placeOrder: function(orderId, addressId){
-			return $http.post('/api/cart/place/' + orderId + '/' + addressId);
+			var that = this;
+			return $http.post('/api/cart/place/' + orderId + '/' + addressId)
+			.then(function() {
+				return _emptyCart();
+			})
+			.then(function() {
+				return that.loadCart();
+			});
 		},
 
 
