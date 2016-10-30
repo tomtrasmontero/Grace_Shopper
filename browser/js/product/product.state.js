@@ -31,9 +31,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 	})
 	.state('productMgmtEdit', {
-		url: 'productMgmtEdit',
-		
-	});
+		url: '/productMgmt',
+		params:{
+			myProduct: null
+		},
+		templateUrl: 'js/product/product-edit.html',
+		controller: 'productEditCtrl'
+
+	})
 
 	$urlRouterProvider.otherwise('/');
 

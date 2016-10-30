@@ -67,7 +67,7 @@
 						<td><a ui-sref="productDetail({ id: {{product.id}} })">
 							<img class='img-responsive' ng-src='{{product.image[0]}}' alt='product pic'/></a></td>
 						<td>
-							<button type='button' class='btn btn-sm btn-danger'>
+							<button type='button' class='btn btn-sm btn-danger' ng-click="editProduct(product)">
 							<i class='glyphicon glyphicon-pencil'></i>
 							</button>
 						</td>
