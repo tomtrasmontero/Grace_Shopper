@@ -29,6 +29,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				return productFactory.getAll()
 			}
 		}
+	})
+	.state('productMgmtEdit', {
+		url: 'productMgmtEdit',
+		
 	});
 
 	$urlRouterProvider.otherwise('/');
