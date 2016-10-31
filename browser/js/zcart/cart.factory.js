@@ -12,7 +12,7 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 				})
 		}
 		else{
-			cart.orderitems[orderitemIndex].quantity = quantity;
+			_cart.orderitems[orderitemIndex].quantity = quantity;
 		}
 	}
 
@@ -36,6 +36,10 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 		return dfd.promise;
 	}
 
+	function _changeQuantityLocally(itemid, quantity, orderid, orderitemIndex){
+		_cart.orderitems[orderitemIndex] = quantity;
+		return _loadCartLocally();
+	}
 
 	function _submitAddress(address, userid){
 		return $http.post('/api/cart/address/' + userid, address)
@@ -167,6 +171,8 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 		changeOrderItem: _changeOrderItem,
 
 		getTotal: _getTotal,
+
+		changeQuantityLocally: _changeQuantityLocally,
 
 	}
 })
