@@ -17,7 +17,6 @@ app.config(function($stateProvider, $urlRouterProvider){
 
 				$scope.pageChanged = function(){
 					var startPos = ($scope.page-1) * $scope.numPerPage;
-					console.log($scope.page);
 				}
 
 				$scope.displayTotal = function(order){
@@ -28,14 +27,9 @@ app.config(function($stateProvider, $urlRouterProvider){
 					return total;
 				}
 
-				console.log ('scope order is ' + $scope.orders);
-				console.log ($scope.orders[3]);
-
 				$scope.delete = function(id){
 					return OrderFactory.destroy(id);
-
 				}
-				console.log (orders);
 			},
 			
 		})
@@ -47,20 +41,10 @@ app.config(function($stateProvider, $urlRouterProvider){
 					return OrderFactory.getOne($stateParams.id);
 				}
 			},
-			controller: function(OrderFactory, $state, $scope, order, $stateParams, Session, $rootScope){
+			controller: function(OrderFactory, $state, $scope, order, $stateParams, Session){
 				$scope.order = order;
-				console.log("the id is " + Session.user.id);
-				console.log (OrderFactory.theorder);
-				console.log ($stateParams.id);
-				console.log (order);
-				console.log (OrderFactory.theorder);
 				$scope.total = 0;
-				console.log ("status is");
-				console.log($scope.order.status);
-
 				$scope.show = Array($scope.order.orderitems.length).fill(false);
-
-
 
 				for (var i =0; i<$scope.order.orderitems.length; i++){
 					$scope.total = $scope.total + ($scope.order.orderitems[i].instrument.price * $scope.order.orderitems[i].quantity);
@@ -115,14 +99,10 @@ app.config(function($stateProvider, $urlRouterProvider){
 				$scope.changeQuantity = function(itemid, quantity, orderid, index){
 					OrderFactory.changeOrderItem(itemid, quantity, orderid);
 					$scope.show[index]=false;
-
-
 				}
 
 				$scope.deleteItem = function(itemid, index, orderid){
 					OrderFactory.deleteItem(itemid, index, orderid);
-					console.log("order id is " + orderid);
-					console.log ("index is " + index);
 				}
 
 				$scope.submit = function(){
@@ -131,51 +111,4 @@ app.config(function($stateProvider, $urlRouterProvider){
 
 			}
 		})
-
-		// .state('cart',{
-		// 	url:'/cart/:id',
-		// 	templateUrl:'/js/order/myCart.html',
-		// 	resolve:{
-		// 		order: function(OrderFactory, $stateParams){
-		// 			return OrderFactory.getCart(1); //change this hard coding s
-		// 		}
-		// 	},
-		// 	controller: function(OrderFactory, $state, $scope, Session, order){
-		// 		console.log (Session);
-		// 		$scope.order = order;
-		// 		console.log (order);
-
-		// 		$scope.submit = function(){
-		// 			OrderFactory.updateOrder($scope.order);
-		// 		}
-
-		// 		$scope.changeQuantity = function(itemid, quantity, orderid){
-		// 			OrderFactory.changeOrderItem(itemid, quantity, orderid);
-
-		// 		}
-
-		// 		$scope.deleteItem = function(itemid, index, orderid){
-		// 			OrderFactory.deleteItem(itemid);
-		// 			console.log("order id is " + orderid);
-		// 			console.log ("index is " + index);
-		// 		}
-
-		// 		$scope.placeOrder = function(){
-		// 			OrderFactory.placeOrder($scope.order.id);
-		// 			$state.go('confirmation', {orderid: order.id});
-		// 		}
-
-		// 	}
-		// })
-
-		// .state('confirmation', {
-		// 	url:'/confirmation/:orderid',
-		// 	//params:['orderid'],
-		// 	templateUrl:'/js/order/confirmation.html',
-		// 	controller: function($scope, $state, $stateParams){
-		// 		console.log ("state param is " + $stateParams.orderid);
-		// 		$scope.orderid = $stateParams.orderid;
-		// 	}
-		// })
-
 })

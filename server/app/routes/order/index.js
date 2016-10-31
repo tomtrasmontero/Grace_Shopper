@@ -80,7 +80,6 @@ router.delete('/orderitem/:id', function(req,res,next){
 		}
 	})
 		.then(function(result){
-			console.log ('vvv');
 			res.sendStatus(200);
 		})
 });
@@ -105,17 +104,13 @@ router.put('/:id', function(req,res,next){
 		})
 	])	
 		.then(function(result){
-			console.log('aaa');
-			console.log ("city is " + req.body.address.city);
 		})
 		.catch(next);
 });
 
 router.get('/cart/:userid', function(req,res,next){
-	console.log ("the id is " + req.params.userid);
 	Order.findOne({
 		where:{
-			//id:50,
 			userId: req.params.userid,
 			status: 'cart',
 		},
@@ -129,9 +124,7 @@ router.get('/cart/:userid', function(req,res,next){
 		]
 
 	})
-	//Order.findById(50)
 		.then(function(result){
-			console.log("result is " + result);
 			res.send(result);
 		})
 		.catch(next);
@@ -139,13 +132,11 @@ router.get('/cart/:userid', function(req,res,next){
 });
 
 router.post('/place/:orderid', function(req, res, next){
-	console.log ("this zzz id is " + req.params.orderid);
 	Order.update({
 		status:'order'
 	},{
 		where: {id: req.params.orderid}
 	})
 		.then(function(result){
-			console.log (result);
 		})
 });
