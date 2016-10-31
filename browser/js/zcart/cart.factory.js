@@ -14,7 +14,17 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 		else{
 			cart.orderitems[orderitemIndex].quantity = quantity;
 		}
-	} //need more work here
+	}
+
+	function _getTotal(items){
+		var total = 0;
+
+		for (var i=0; i<items.length; i++){
+			total = items[i].quantity * items[i].instrument.price + total;
+		}
+
+		return total;
+	}
 
 	function _emptyCart() {
 		var cart = {
@@ -156,6 +166,8 @@ app.factory('ZCartFactory',function($http, $state, Session, $q, $window){
 		deleteAddress: _deleteAddress,
 
 		changeOrderItem: _changeOrderItem,
+
+		getTotal: _getTotal,
 
 	}
 
