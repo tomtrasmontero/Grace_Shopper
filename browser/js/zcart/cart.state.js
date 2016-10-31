@@ -5,17 +5,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		resolve: {
 
 			cart: function(ZCartFactory, AuthService, Session, $timeout) {
-
-				return $timeout (function(){
-
-					return AuthService.getLoggedInUser()
-						.then(function(result){
-							Session.user = result;
-							return ZCartFactory.cart;
-
-						}, 1500);
-				})
-			
+				return AuthService.getLoggedInUser()
+					.then(function(result){
+						Session.user = result;
+						return ZCartFactory.cart;
+					});
 			}
 		},
 		controller: function($scope, $state, cart, ZCartFactory, AuthService, Session, $rootScope) {
