@@ -28,10 +28,11 @@ router.post('/add', function(req,res,next){
 		title: req.body.name,
 		brand: req.body.brand,
 		family: req.body.family,
-		type: [req.body.type],
+		type: req.body.type,
 		description: req.body.description,
 		price: req.body.price,
-		quantity: req.body.quantity
+		quantity: req.body.quantity,
+		image: [req.body.image]
 	})
 	.then(function(){
 		return Instrument.findAll()
