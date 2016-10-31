@@ -137,6 +137,7 @@ var seedInstruments = function() {
     function randomIt(min,max){
         return Math.floor((Math.random() * max) + min);
     };
+    var productType = ['Guitar','Drums','Bass','DJ','Band & Orchestra','Mics & Wireless'];
     var instruments = [];
     
     for (let i = 0; i < numUsers+25; i++) {
@@ -146,7 +147,7 @@ var seedInstruments = function() {
             brand: "brand" + randomIt(1,15),
             price: (Math.random()*100.00).toFixed(2),
             family: "family" + randomIt(1,5),
-            type: "type" + randomIt(1,5),
+            type: productType[randomIt(1,6)-1],
             description: faker.company.bs(),
             image: [faker.image.avatar(),faker.image.avatar(),faker.image.avatar()],
             quantity: randomIt(1,99)
