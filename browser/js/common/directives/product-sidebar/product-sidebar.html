@@ -1,15 +1,11 @@
-<div class='container hidden-xs col-xs-3 pull-left'>
-    <div class='list-group'>
-
-        <input class='list-group-item' type='text' ng-model='query' placeholder='Search Product & Description'>
+<div class='container hidden-xs col-xs-3 pull-left sidebar-outer'>
+    <div class='list-group fixed'>
+        <h3 class='list-group-item-heading'>Search</h3>
+        <input class='list-group-item' onClick="this.select();" type='text' ng-model='query' placeholder='by Product'>
         <br>
-        <ul class="list-group">  
-            <li class="list-group-item"><a href="#">Start Bootstrap</a></li>
-            <li class="list-group-item"><a href="#">Categories</a></li>
-            <li class="list-group-item"><a href="#">Type</a></li>
-            <li class="list-group-item"><a href="#">Ratings</a></li>
-            <li class="list-group-item"><a href="#">Brand</a></li>
-            <li class="list-group-item"><a href="#">Price</a></li>
-        </ul>
+        <div>
+            <h3 class='list-group-item-heading'>or Categories</h3>
+            <li class='list-group-item list-group-item-action' ng-model='searchFil' ng-repeat='product in productType'><a href="{{product}}" ng-click='searchCategories(product)'>{{product}}</a></li>
+        </div>
     </div>
 </div>

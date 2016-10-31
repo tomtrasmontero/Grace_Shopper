@@ -80,7 +80,7 @@
 						<th>Edit</th>
 					</tr>
 					<tr>
-						<th colspan='7'><input st-search='' class='form-control' placeholder='global search...' type='text'/></th>
+						<th colspan='7'><input st-search='' onClick="this.select();" class='form-control' placeholder='global search...' type='text'/></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -94,9 +94,13 @@
 						<td><a ui-sref="productDetail({ id: {{product.id}} })">
 							<img class='img-responsive' style='width:128px; height:128px;' ng-src='{{product.image[0]}}' alt='product pic'/></a></td>
 						<td>
-							<button type='button' class='btn btn-sm btn-danger' ng-click="editProduct(product)">
+							<button type='button' class='btn btn-sm btn-info' ng-click="editProduct(product)">
 							<i class='glyphicon glyphicon-pencil'></i>
 							</button>
+
+							<button type='button' class='btn btn-sm btn-danger' ng-click="deleteProduct(product)">
+							<i class='glyphicon glyphicon-trash'></i>
+							</button>							
 						</td>
 					</tr>
 				</tbody>

@@ -1,18 +1,38 @@
-<div class='container'>
-	<div class='col-xs-10 col-md-6 pull-right'>
+<div class='container '>
+	<div class='hidden-xs col-md-6 pull-right'>
+		<div id='slides_control'>
+			<div>
+				<uib-carousel interval='myInterval'>
+					<uib-slide ng-repeat='slide in product.image' active='active'>
+					<img class='slideImg' ng-src='{{slide}}'>
+					</uib-slide>	
+				</uib-carousel>
+			</div>	
+		</div>
+	</div>	
+
+	<div class='col-md-6 hidden-md hidden-sm hidden-lg vertical-center'>
 		<ul>
-			<img ng-repeat='picture in product.image' class="img-responsive" style='width:80%;height:250px;padding:5px;' ng-src="{{picture}}"/>	
+			<img ng-repeat='picture in product.image' class="img-responsive smallImg" ng-src="{{picture}}"/>	
 		</ul>
 	</div>	
+
 	
 	<div class='col-md-5 pull-left'>
 		<h1 class='text-center'>{{product.title}}</h1>
-		<h2>Product Detail</h2>
-		<ul>
-			<li>Brand:{{product.brand}}</li>
-			<li>Type:{{product.type}}</li>
-			<li>Description:{{product.description}}</li>
-		</ul>
+		<h3>Product Detail</h3>
+		<div class='list-group'>
+			<div href="#" class='list-group-item list-group-item-action noBorder'>
+				<h5 class='list-group-item-heading'>Brand: {{product.brand}}</h5>
+			</div>				
+			<div href="#" class='list-group-item list-group-item-action noBorder'>
+				<h5 class='list-group-item-heading'>Type: {{product.type}}</h5>
+			</div>	
+			<div href="#" class='list-group-item list-group-item-action noBorder'>
+				<h5 class='list-group-item-heading'>Description:</h5>
+				<p class='list-group-text'>  {{product.description}}</p>
+			</div>				
+		</div>
 		<h5>Buy it Now!</h5>
 		<ng-form name='orderProduct' novalidate>
 			Qty: <input type='number' min='1' required ng-model='product.quantity' ng-min='1' value='1'>
@@ -20,8 +40,8 @@
 		</ng-form>
 	</div>
 </div>
-
-<div class='container'>
+<br clear="all"/>
+<div class='container paddingBot'>
 	<div class="panel panel-default">
 		<h3>Product Reviews</h3>
 		<div ng-repeat='review in reviews' class='well top-buffer'>
