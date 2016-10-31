@@ -33,12 +33,19 @@ app.controller('productMgmtCtrl', function($scope, products,productFactory,$stat
 	$scope.addNewItem = function(newProduct){
 		productFactory.addProduct(newProduct)
 		.then(function(result){
+			$scope.newItem.name = '';
+			$scope.newItem.brand = '';
+			$scope.newItem.family = '';
+			$scope.newItem.type = '';
+			$scope.newItem.price = '';
+			$scope.newItem.quantity = '';
+			$scope.newItem.image = '';
+			$scope.newItem.description = '';
 			$scope.products = result;
 		});
 	};
 
 	$scope.editProduct = function(product){
-		console.log(product, 'in mgmt ctrl');
 		$state.go('productMgmtEdit', {myProduct: product});
 	};
 
@@ -47,6 +54,7 @@ app.controller('productMgmtCtrl', function($scope, products,productFactory,$stat
 //Products Edit controller
 app.controller('productEditCtrl', function($scope,$state, productFactory){
 	$scope.product = $state.params.myProduct;
+	$scope.deleteButton = false;
 
 	$scope.edit = function(product){
 		productFactory.editProduct(product)

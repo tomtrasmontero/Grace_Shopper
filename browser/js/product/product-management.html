@@ -3,25 +3,52 @@
 	
 	<div class='container'>
 		<h2>Add Product</h2>
+
 		<div class='well'>
+		<span class='help-block'> All fields are required to Add Product!</span>
 		<ng-form name='addProduct' novalidate>
 			<div class='form-group'>
+
+				<div class='col-xs-12 col-md-6'>
 				<label>Product Name:</label>
 				<input type='text' class='form-control' name='productName' ng-model='newItem.name' required>
+				</div>
+
+				<div class='col-xs-12 col-md-6'>				
 				<label>Product Brand:</label>
 				<input type='text' class='form-control' ng-model='newItem.brand' required>
+				</div>
+
+				<div class='col-xs-12 col-md-6'>				
 				<label>Product Family:</label>
 				<input type='text' class='form-control' ng-model='newItem.family' required>
+				</div>
+
+				<div class='col-xs-12 col-md-6'>				
 				<label>Product Type:</label>
 				<input type='text' class='form-control' ng-model='newItem.type' required>
+				</div>
+
+				<div class='col-xs-12 col-md-6'>				
+				<label>Product Price:</label>
+				<input type='number' min='0' class='form-control' ng-model='newItem.price' required>
+				</div>
+
+				<div class='col-xs-12 col-md-6'>
+				<label>Product Quantity:</label>
+				<input type='number' min='0' class='form-control' ng-model='newItem.quantity' required>
+				</div>
+
+				<div class='col-xs-12 col-md-6'>				
+				<label>Product Image:</label>
+				<input type='url' placeholder='submit image URL here...' class='form-control' ng-model='newItem.image'>
+				</div>
+
+				<div class='col-xs-12 col-md-6'>				
 				<label>Product Desciption:</label>
 				<textarea type='text' class='form-control' ng-model='newItem.description' required></textarea>
-				<label>Product Price:</label>
-				<input type='number' class='form-control' ng-model='newItem.price' required>
-				<label>Product Quantity:</label>
-				<input type='number' class='form-control' ng-model='newItem.quantity' required>
-				<label>Product Image:</label>
-				<input type='image' placeholder='submit image URL here...'class='form-control' ng-model='newItem.image'>
+				</div>
+
 			</div>
 			<input type='submit' class='btn btn-primary' ng-click='addNewItem(newItem)' ng-disabled='addProduct.$invalid'>
 		</ng-form>
@@ -65,7 +92,7 @@
 						<td>{{product.family}}</td>
 						<td>{{product.price}}</td>
 						<td><a ui-sref="productDetail({ id: {{product.id}} })">
-							<img class='img-responsive' ng-src='{{product.image[0]}}' alt='product pic'/></a></td>
+							<img class='img-responsive' style='width:128px; height:128px;' ng-src='{{product.image[0]}}' alt='product pic'/></a></td>
 						<td>
 							<button type='button' class='btn btn-sm btn-danger' ng-click="editProduct(product)">
 							<i class='glyphicon glyphicon-pencil'></i>
