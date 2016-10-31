@@ -10,8 +10,6 @@ app.factory('OrderFactory',function($http, $state){
 		return $http.get('/api/order')
 			.then(function(results){
 				angular.copy(results.data, orders);
-				console.log ('orders are ' + orders);
-				console.log(orders[1]);
 				return orders;
 			})
 	}
@@ -31,16 +29,8 @@ app.factory('OrderFactory',function($http, $state){
 		return $http.get('/api/order/' + id)
 			.then(function(result){
 				angular.copy(result.data, theorder);
-				console.log("the order is fukn is " + theorder.id);
-				console.log ("the order is " + result.data['id']);
 				return theorder;
 			})
-	}
-
-	OrderFactory.oneOfThree = function(status){
-		if (status === "shipped" || status === "cart" || status === "order")
-			return true
-		else return false;
 	}
 
 	OrderFactory.changeOrderItem = function(id, quantity, index){
@@ -52,25 +42,20 @@ app.factory('OrderFactory',function($http, $state){
 	}
 	
 	OrderFactory.deleteItem = function(id, index, orderid){
-		console.log('aaa');
 		return $http.delete('/api/order/orderitem/' + id)
 			.then(function(result){
 				return OrderFactory.getOne(orderid);
-
 			})
 	}
 
 
 	OrderFactory.updateOrder = function(orderObj){
-		console.log(orderObj.id);
 		return $http.put('/api/order/' + orderObj.id, orderObj)
 			.then(function(result){
-				console.log (result);
 			})
 	}
 
 	OrderFactory.getCart = function(userId){
-		console.log("user id is " + userId);
 		return $http.get('/api/order/cart/' + userId)
 			.then(function(result){
 				angular.copy(result.data, cart);
@@ -79,7 +64,6 @@ app.factory('OrderFactory',function($http, $state){
 	}
 
 	OrderFactory.placeOrder = function(orderId){
-		console.log(orderId);
 		return $http.post('/api/order/place/' + orderId)
 		 	.then(function(result){
 
@@ -94,5 +78,4 @@ app.factory('OrderFactory',function($http, $state){
 	}
 
 	return OrderFactory;
-
 })

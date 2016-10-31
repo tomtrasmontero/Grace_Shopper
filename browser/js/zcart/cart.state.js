@@ -18,10 +18,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			
 			}
 		},
-		controller: function($scope, $state, cart, ZCartFactory, AuthService, Session, $rootScope) { // remove session
+		controller: function($scope, $state, cart, ZCartFactory, AuthService, Session, $rootScope) {
 			$scope.cart = cart;
 			$scope.newAddress = {};
-			console.log ($scope.cart);
 			$scope.total = function(){
 				return ZCartFactory.getTotal($scope.cart.orderitems);
 			}
