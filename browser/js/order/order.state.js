@@ -14,14 +14,11 @@ app.config(function($stateProvider, $urlRouterProvider){
 				$scope.page = 1;
 				$scope.numPerPage = 3;
 				$scope.displayOrders = $scope.orders.slice(0,$scope.numPerPage);
+
 				$scope.pageChanged = function(){
 					var startPos = ($scope.page-1) * $scope.numPerPage;
 					console.log($scope.page);
 				}
-
-				// $scope.addToTotal = function(n){
-				// 	$scope.total = $scope.total + n;
-				// }
 
 				$scope.displayTotal = function(order){
 					var total = 0;
@@ -51,19 +48,42 @@ app.config(function($stateProvider, $urlRouterProvider){
 				}
 			},
 			controller: function(OrderFactory, $state, $scope, order, $stateParams, Session, $rootScope){
-				//OrderFactory.getOne($stateParams.id);
 				$scope.order = order;
 				console.log("the id is " + Session.user.id);
 				console.log (OrderFactory.theorder);
-				//console.log ("k" + $scope.order[id]);
 				console.log ($stateParams.id);
 				console.log (order);
 				console.log (OrderFactory.theorder);
 				$scope.total = 0;
+				console.log ("status is");
+				console.log($scope.order.status);
+
+				$scope.show = Array($scope.order.orderitems.length).fill(false);
+
 
 
 				for (var i =0; i<$scope.order.orderitems.length; i++){
 					$scope.total = $scope.total + ($scope.order.orderitems[i].instrument.price * $scope.order.orderitems[i].quantity);
+				}
+
+
+				$scope.editQuantity = function(index){
+					$scope.show[index] = true;
+				}
+
+				$scope.changeToOrder = function(){
+					$scope.order.status = "order";
+					OrderFactory.updateOrder($scope.order);
+				}
+
+				$scope.changeToCart = function(){
+					$scope.order.status = "cart";
+					OrderFactory.updateOrder($scope.order);
+				}
+
+				$scope.changeToShipped = function(){
+					$scope.order.status = "shipped";
+					OrderFactory.updateOrder($scope.order);
 				}
 
 				$scope.displayTotal = function(order){
@@ -74,31 +94,33 @@ app.config(function($stateProvider, $urlRouterProvider){
 					return total;
 				}
 
-				// $scope.showTotal = function(){
-				// 	// var total = 0;
-				// 	// for (let i = 0; i< $scope.order.orderitems.length; i++){
-				// 	// 	total = total + ($scope.order.orderitems[i].instrument.price * $scope.order.orderitems[i].quantity);
-				// 	// }
-				// 	return 1;
-				// }
+				$scope.submitAddress = function(){
+					OrderFactory.submitAddress($scope.newAddress, $scope.order.user.id, $scope.order.id)
+						.then(function(){
+							$scope.newAddress.line1 = "";
+							$scope.newAddress.line2 = "";
+							$scope.newAddress.city = "";
+							$scope.newAddress.state = "";
+							$scope.newAddress.zip = "";
+							$scope.newAddress.country = "";
 
-				// $scope.test = function(){
-				// 	return "aaa"
-				// }
+						})
+				}
 
 				$scope.doesBelongTo = function(){
 					var oneOfThree = OrderFactory.oneOfThree($scope.order.status);
 					return oneOfThree;
 				}
 
-				$scope.changeQuantity = function(itemid, quantity, orderid){
+				$scope.changeQuantity = function(itemid, quantity, orderid, index){
 					OrderFactory.changeOrderItem(itemid, quantity, orderid);
+					$scope.show[index]=false;
 
 
 				}
 
 				$scope.deleteItem = function(itemid, index, orderid){
-					OrderFactory.deleteItem(itemid);
+					OrderFactory.deleteItem(itemid, index, orderid);
 					console.log("order id is " + orderid);
 					console.log ("index is " + index);
 				}
@@ -107,11 +129,6 @@ app.config(function($stateProvider, $urlRouterProvider){
 					OrderFactory.updateOrder($scope.order);
 				}
 
-
-				// $scope.deleteOrder = function(id){
-				// 	OrderFactory.destroy(id);
-				// 	$state.go('orderList');
-				// }
 			}
 		})
 

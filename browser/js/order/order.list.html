@@ -56,8 +56,8 @@
 				</td>
 
 				<td>
-					<div ng-repeat='item in order.orderitems'  class = 'alert alert-danger'>
-						<p class="big-strong">{{item.instrument.title}}</p> with a quantity of <p class="big-strong">{{item.quantity}}</p> and a subtotal of <p class="big-strong">${{item.instrument.price * item.quantity | number:2}}</p>
+					<div ng-repeat='item in order.orderitems'  class = 'w3-panel w3-indigo w3-round-large'>
+						<p class="big-strong">{{item.instrument.title}}</p> Quantity: <p class="big-strong">{{item.quantity}}</p> Subtotal: <p class="big-strong">${{item.instrument.price * item.quantity | number:2}}</p>
 						
 			
 					</div>
