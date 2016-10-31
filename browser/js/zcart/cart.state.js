@@ -4,19 +4,29 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl: '/js/zcart/cart.html',
 		resolve: {
 
-			cart: function(ZCartFactory, AuthService, Session) {
+			cart: function(ZCartFactory, AuthService, Session, $timeout) {
 
-				return AuthService.getLoggedInUser()
-					.then(function(result){
-						Session.user = result;
-						return ZCartFactory.cart;
-					})
+				return $timeout (function(){
+
+					return AuthService.getLoggedInUser()
+						.then(function(result){
+							Session.user = result;
+							return ZCartFactory.cart;
+
+						}, 1500);
+				})
 			
 			}
 		},
 		controller: function($scope, $state, cart, ZCartFactory, AuthService, Session, $rootScope) { // remove session
 			$scope.cart = cart;
 			$scope.newAddress = {};
+			console.log ($scope.cart);
+			$scope.total = function(){
+				return ZCartFactory.getTotal($scope.cart.orderitems);
+			}
+
+			$scope.show = Array($scope.cart.orderitems.length).fill(false);
 
 			$scope.submitAddress = function(){
 				ZCartFactory.submitAddress($scope.newAddress, Session.user.id)
@@ -36,8 +46,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				ZCartFactory.deleteAddress(id);
 			}
 
+			$scope.editQuantity = function(index){
+				$scope.show[index] = true;
+			}
+
 			$scope.changeQuantity = function(itemid, quantity, orderid, orderitemIndex){
 				ZCartFactory.changeOrderItem(itemid, quantity, orderid, orderitemIndex);
+				$scope.show[orderitemIndex] = false;
 			}
 
 			$scope.deleteItem = function(item){
