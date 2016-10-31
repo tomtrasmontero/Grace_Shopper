@@ -7,7 +7,7 @@
 	<div ng-repeat="item in order.orderitems" >
 		<form name="oneitem" class = "w3-card-4 w3-light-grey">
 			<div class="w3-row">
-				<img class="slideImg img-responsive w3-col m3 l3" ng-src="{{item.instrument.image[0]}}" style="width:40px; height:30px">
+				<img class="slideImg img-responsive w3-col m3 l3" ng-src="{{item.instrument.image[0]}}" style="width:60px; height:60px">
 				<h3 class="w3-col m3 l3">&nbsp&nbsp{{item.instrument.title}}</h3>
 				<h4 class="w3-col m3 l3" ng-if="!show[$index]">&nbsp Quantity: {{item.quantity}} </h4>
 				<input ng-if="show[$index]" class="form-control w3-col m3 l3" type="number" ng-model = "item.quantity" required>
