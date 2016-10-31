@@ -55,7 +55,7 @@ app.factory('OrderFactory',function($http, $state){
 		console.log('aaa');
 		return $http.delete('/api/order/orderitem/' + id)
 			.then(function(result){
-
+				return OrderFactory.getOne(orderid);
 
 			})
 	}
@@ -84,6 +84,13 @@ app.factory('OrderFactory',function($http, $state){
 		 	.then(function(result){
 
 		 	})
+	}
+
+	OrderFactory.submitAddress = function(address, userid, orderid){
+	return $http.post('/api/cart/address/' + userid, address)
+		.then(function(){
+			return OrderFactory.getOne(orderid);
+		})
 	}
 
 	return OrderFactory;

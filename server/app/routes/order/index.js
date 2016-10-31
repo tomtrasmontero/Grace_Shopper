@@ -43,7 +43,10 @@ router.get('/:id', function(req, res, next){
 
 	Order.findById(req.params.id, {
 		include:[
-			User,
+			{
+				model: User,
+				include:[Address],
+			},
 			{
 				model: OrderItem,
 				include:[Instrument],

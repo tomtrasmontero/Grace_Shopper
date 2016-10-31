@@ -20,7 +20,6 @@
 				<h4 class="w3-col m3 l3 pull-right">&nbsp subtotal is {{item.instrument.price * item.quantity | number:2}}</h4>
 			</div>
 			<div class="w3-row">
-				<!-- <div class="w3-col m3 l3"></div> -->
 				<button ng-if="!show[$index]" class="btn btn-warning w3-col m3 l3 pull-right" ng-click="editQuantity($index)"> Edit Quantity</button>
 				<button ng-if="show[$index]" class="btn btn-danger w3-col m3 l3 pull-right" ng-click='changeQuantity(item.id, item.quantity, order.id, $index)' ng-disabled = "oneitem.$invalid">change quantity</button>
 				<button class="btn btn-success w3-col m3 l3 pull-right" ng-click="deleteItem(item)"> delete this item </button>

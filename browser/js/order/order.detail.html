@@ -3,33 +3,91 @@
 	<h4 class="small-title">User Email:</h4> <h5 class="content">{{order.user.email}}</h5></br></br>
 	<h4 class="small-title">Order Placing Time is:</h4> <h5 class="content">{{order.createdAt}}</h5></br></br>
 	<form name='orderDetails' class='form-group'>
-			
-		<div ng-repeat = 'item in order.orderitems' class = "well">
-			<form name="item">
-				<h4 class="search-title">item name: </h4><p class="big-strong">{{item.instrument.title}}</p> <input class = 'form-control' type='text' ng-model='item.quantity' >
-				<h4 class="search-title">subtotal is </h4><p class="big-strong">{{item.instrument.price * item.quantity | number: 2}}</p></br></br>
-				<button class="btn btn-danger" ng-click='changeQuantity(item.id, item.quantity, order.id)' ng-disabled = "item{{item.id}}.$invalid">change quantity</button>
-				<button class="btn btn-success" ng-click="deleteItem(item.id, $index, order.id)"> delete this item </button>
+
+	<div ng-repeat="item in order.orderitems" >
+		<form name="oneitem" class = "w3-card-4 w3-light-grey">
+			<div class="w3-row">
+				<img class="slideImg img-responsive w3-col m3 l3" ng-src="{{item.instrument.image[0]}}" style="width:40px; height:30px">
+				<h3 class="w3-col m3 l3">&nbsp&nbsp{{item.instrument.title}}</h3>
+				<h4 class="w3-col m3 l3" ng-if="!show[$index]">&nbsp Quantity: {{item.quantity}} </h4>
+				<input ng-if="show[$index]" class="form-control w3-col m3 l3" type="number" ng-model = "item.quantity" required>
+				<h4 class="w3-col m3 l3 pull-right">&nbsp subtotal is {{item.instrument.price * item.quantity | number:2}}</h4>
+			</div>
+			<div class="w3-row">
+				<button ng-if="!show[$index]" class="btn btn-warning w3-col m3 l3 pull-right" ng-click="editQuantity($index)"> Edit Quantity</button>
+				<button ng-if="show[$index]" class="btn btn-danger w3-col m3 l3 pull-right" ng-click='changeQuantity(item.id, item.quantity, order.id, $index)' ng-disabled = "!item.quantity">change quantity</button>
+				<button class="btn btn-success w3-col m3 l3 pull-right" ng-click="deleteItem(item.id, $index, order.id)"> delete this item </button>
+			</div>
+		</form>
+		</br>
+	</div>
+
+		<h4 class="small-title">order status: {{order.status}}</h4>
+		</br>
+		</br>
+
+		<h3>Select a new status</h3>
+		<div class="w3-dropdown-hover">
+			<button class="w3-btn w3-indigo"> Select a new Status</button>
+			<div class="w3-dropdown-content w3-border">
+				<a ng-click="changeToOrder()">order</a>
+				<a ng-click="changeToShipped()">shipped</a>
+				<a ng-click="changeToCart()">cart</a>
+			</div>
+		</div>
+
+		</br>
+		</br>
+
+
+		<h4 class="small-title">total: </h4> <h1>${{displayTotal(order) | number:2}}</h1></br>
+
+
+	<div>
+
+		<form name="addShipping" class="w3-container">
+				<h4>shipping address line 1 <span style ="color:red">(Required!)</span>: </h4> <input class = 'form-control w3-input w3-hover-blue' type = 'text'  ng-model = 'newAddress.line1' required>
+				<h4>shipping address line 2:</h4> <input class = 'form-control w3-input w3-hover-blue' type = 'text'  ng-model = 'newAddress.line2'>
+				<h4>shipping city <span style ="color:red">(Required!)</span>:</h4> <input class = 'form-control w3-input w3-hover-blue' type = 'text' ng-model = 'newAddress.city' required>
+				<h4>shipping state <span style ="color:red">(Required!)</span>:</h4> <input class = 'form-control w3-input w3-hover-blue' type = 'text' ng-model = 'newAddress.state' required>
+				<h4> shipping zipcode <span style ="color:red">(Required! 5 digit only!)</span>: </h4> <input class = 'form-control w3-input w3-hover-blue' type = 'number'  ng-model = 'newAddress.zip' ng-pattern = "/^(\d{5})$/" required>
+ 
+				<h4> shipping country <span style ="color:red">(Required!)</span>:</h4> <input class = 'form-control w3-input w3-hover-blue' type = 'text'  ng-model = 'newAddress.country' required>
+				</br>
+				
+				<button class = "w3-btn w3-indigo" ng-click="submitAddress()" ng-disabled="addShipping.$invalid" >Add this new address!</button>
+		</form>
+		</br>
+		</br>
+
+
+		<h2>Please select a shipping address!</h2>
+
+		<form name="shipping">
+			<div ng-repeat="address in order.user.addresses" class="row">
+				<label>
+					<input type="radio" ng-model="order.address" ng-value="address" class="w3-radio radio-inline" ng-click="submit()">
+					{{address.line1}}  {{address.line2}}</br>
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{address.city}}, {{address.state}}  {{address.zip}}
+				</label>
+				<button ng-click="deleteAddress(address.id)" class = "w3-btn w3-red col-xs-5 col-md-5 pull-right">Delete this Address!</button></br>
+			</div>
+
+		</br>
+		</br>
+
+
+		<h2>Shipping info:</h2>
+				<h5>First Name: {{order.user.firstName}}</h5>
+				<h5>Last Name: {{order.user.lastName}}</h5>
+				<h5>phone:{{order.user.phone}}</h5>
+				<h5>shipping address line 1: {{order.address.line1}}</h5>
+				<h5>shipping address line 2: {{order.address.line2}}</h5>
+				<h5>shipping city: {{order.address.city}}</h5>
+				<h5>shipping state: {{order.address.state}}</h5>
+				<h5>shipping zipcode: {{order.address.zip}}</h5>
+				<h5>shipping country: {{order.address.country}}</h5>
 			</form>
 		</div>
-		<h4 class="small-title">order status: (cart, order, shipped only)</h4><input class = 'form-control' type = 'text'  ng-model = 'order.status'></br>
-		<h4 class="small-title">total: </h4> <h1>${{displayTotal(order) | number:2}}</h1></br>
-		
-		<h2 class="shipping-title"> shipping info:</h2></br>
-		<h4 class="small-title">First Name: </h4> <h5 class="content">{{order.user.firstName}}</h5></br></br>
-		<h4 class="small-title">Last Name:</h4> <h5 class="content">{{order.user.lastName}}</h5></br></br>
-		<h4 class="small-title">phone:</h4> <h5 class="content">{{order.user.phone}}</h5></br></br>
-		<h4 class="small-title">shipping address line 1:</h4> <input class = 'form-control' type = 'text'  ng-model = 'order.address.line1'></br>
-		<h4 class="small-title">shipping address line 2:</h4> <input class = 'form-control' type = 'text'  ng-model = 'order.address.line2'></br>
-		<h4 class="small-title">shipping city:</h4> <input class = 'form-control' type = 'text' ng-model = 'order.address.city'></br>
-		<h4 class="small-title">shipping state:</h4> <input class = 'form-control' type = 'text' ng-pattern = "/^(\w{2})$/" ng-model = 'order.address.state'></br>
-		<h4 class="small-title">shipping zipcode: (5 digit only!)</h4> <input class = 'form-control' type = 'text'  ng-model = 'order.address.zip' ng-pattern = "/^(\d{5})$/"></br>
 
-		<h4 class="small-title">shipping country: </h4><input class = 'form-control' type = 'text'  ng-model = 'order.address.country'></br>
-		
-		<button class = "btn btn-warning" ng-click="submit()" ng-disabled="orderDetails.$invalid || !order.status.length || !order.address.line1.length || !order.address.city.length || !order.address.state.length || !order.address.zip.length || !order.address.country.length || !doesBelongTo()" >Change shipping info!</button>
-
-
-<!-- 		<button ng-click='deleteOrder(order.id)' class =' btn btn-success'> delete this order!</button> -->
-	</form>
 </div>
