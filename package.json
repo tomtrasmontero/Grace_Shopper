@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "start:dev": "LOGGING=true nodemon --watch server -e js,html server/start.js",
-    "postinstall": "gulp build && node seed"
+    "postinstall": "gulp build && node seed.js"
   },
   "engines": {
     "node": ">=4.0.0"
