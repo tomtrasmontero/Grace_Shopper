@@ -12,7 +12,7 @@ app.config(function ($stateProvider) {
 
             homeService.getBestSellers()
         	.then(function(bestSellers) {
-        		$scope.bestSellers = bestSellers.slice(0,3);
+        		$scope.bestSellers = bestSellers.slice(0,4);
         	});
         }
     });
