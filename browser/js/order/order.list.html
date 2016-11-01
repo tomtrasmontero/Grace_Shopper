@@ -1,13 +1,4 @@
 <div>
-
-<!-- 	Filter by order id<input type="text" ng-model="search.orderId" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
-	Filter by user email<input type="text" ng-model="search.email" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
-	Filter by order status<input type="text" ng-model="search.status" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
-	Filter by state <input type="text" ng-model="search.state" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
-	Filter by city <input type="text" ng-model="search.city" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
-	Filter by zipcode<input type="text" ng-model="search.zipcode" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
-	Filter by country<input type="text" ng-model="search.country" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br> -->
-
 	<div class ="row container center-block" >
 		<div class = "col-xs-12 col-md-4">
 			<h4 class="search-title">Filter by order id</h4><input type="text" ng-model="search.orderId" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
@@ -19,6 +10,7 @@
 			<h4 class="search-title">Filter by order status</h4><input type="text" ng-model="search.status" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
 		</div>
 	</div>
+
 	<div class="row container center-block">
 		<div class = "col-xs-12 col-md-4">
 			<h4 class="search-title">Filter by state</h4> <input type="text" ng-model="search.state" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
@@ -35,7 +27,14 @@
 		<div class= "col-xs-12 col-md-4">
 			<h4 class="search-title">Filter by country</h4><input type="text" ng-model="search.country" class = 'form-control' ng-change="filter()" placeholder="Search by order id"/></br>
 		</div>
+
+	    <div class="kod_button_base b08_3d_pushback col-xs-12 col-md-4" ng-click="emptySearch()">
+	        <div>Empty Search</div>
+	        <div>Empty Search</div>
+    	</div>
+
 	</div>
+</div>
 
 
 	<div class="container">
