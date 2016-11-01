@@ -1,15 +1,50 @@
 <ul class="list-group">
-	<button class="btn btn-danger" ng-click="deleteUser(user.id)">Delete</button>
+	<button class="btn btn-danger" ng-click="deleteUser(user.id)">Delete Account</button>
 	<li class="list-group-item">
 		Avatar: <img src="{{user.avatar}}">
 	</li>
-	<li class="list-group-item">
-		Name: {{ user.firstName }} {{ user.lastName }}
-	</li>
-	<li class="list-group-item">
-		Email: {{ user.email }}
-	</li>
-	<li class="list-group-item">
-		Type: {{ user.type }}
-	</li>
 </ul>
+
+<form editable-form name='editableForm' onaftersave='editUser(user)'>
+<div>
+	<button type='button' class='btn btn-info' ng-click='editableForm.$show()' ng-show='!editableForm.$visible'>Edit</button>
+	<span ng-show='editableForm.$visible'>
+		<button type='submit' class='btn btn-primary' ng-disabled='editableForm.$waiting'>Save</button>
+		<button type='button' class='btn btn-default' ng-disabled='editableForm.$waiting' ng-click='editableForm.$cancel()'>Cancel</button>
+	</span>		
+	<br clear='all'>
+	<div>	
+		<div class='col-md-5 editForm'>
+			<span class='title'> First Name: </span>
+			<span class='title text-center' editable-text='user.firstName'>{{user.firstName}}</span>	
+		</div>
+		<div class='col-md-5 editForm'>
+			<span class='title'> Last Name: </span>
+			<span class='title text-center' editable-text='user.lastName'>{{user.lastName}}</span>	
+		</div>	
+		<div class='col-md-5 editForm'>
+			<span class='title'> Email: </span>
+			<span class='title text-center' editable-text='user.email'>{{user.email}}</span>	
+		</div>
+		<div class='col-md-5 editForm'>
+			<span class='title'> Phone: </span>
+			<span class='title text-center' editable-text='user.phone'>{{user.phone}}</span>	
+		</div>	
+	</div>		
+</div>	
+<br clear='all'>
+
+<!-- <div class='container'>
+	<div>
+	<input type='button' class='btn btn-success' value='Add Photo'/>
+	</div>
+	<br>	
+	<div ng-repeat='picture in product.image track by $index' class='col-md-4'>
+		<button ng-show='editableForm.$visible' ng-disabled='editableForm.$waiting' type='button' class='btn btn-sm btn-danger' ng-click="deleteImg($index)">
+		<i class='glyphicon glyphicon-trash pull-right'></i>
+		</button>
+		<img class='img-responsive imgMax' ng-src="{{picture}}"/>
+	</div>
+</div> -->
+
+</form>

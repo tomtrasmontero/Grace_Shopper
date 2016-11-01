@@ -16,6 +16,10 @@ app.factory('userFactory', function($http) {
 
 		deleteUser: function(id) {
 			return $http.delete('/api/users/' + id);
+		},
+
+		editUser: function(user) {
+			return $http.put('/api/users/' + user.id, user);
 		}
 	}
 })

@@ -11,4 +11,11 @@ app.controller('userProfileCtrl', function($scope, userFactory, $stateParams, $s
 		});
 	};
 
+	$scope.editUser = function(user) {
+		userFactory.editUser(user)
+		.then(function(user) {
+			$state.go('/user/' + user.id);
+		});
+	};
+
 });
