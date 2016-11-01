@@ -1,4 +1,4 @@
-app.controller('userProfileCtrl', function($scope, userFactory, $stateParams, $state) {
+app.controller('userProfileCtrl', function($scope, userFactory, $stateParams, $state, AuthService) {
 	userFactory.getById($stateParams.id)
 	.then(function(user) {
 		$scope.user = user;
@@ -7,7 +7,7 @@ app.controller('userProfileCtrl', function($scope, userFactory, $stateParams, $s
 	$scope.deleteUser = function(id) {
 		userFactory.deleteUser(id)
 		.then(function() {
-			$state.go('userMgmt');
+			$state.go('home');
 		});
 	};
 
