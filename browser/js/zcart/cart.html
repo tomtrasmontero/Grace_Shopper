@@ -47,6 +47,10 @@
 
 		<h2>Please select a shipping address!</h2>
 
+		<div ng-if="!cart.user.addresses.length">
+			<h1 style="color:red"> Please add a new address first before continue</h1>
+		</div>
+
 		<form name="shipping">
 			<div ng-repeat="address in cart.user.addresses" class="row">
 				<label>
@@ -73,8 +77,14 @@
 				<h4>shipping zipcode: {{cart.address.zip}}</h4>
 				<h4>shipping country: {{cart.address.country}}</h4>
 
-				<button class = "btn btn-primary" ng-click="placeOrder()" ng-disabled="!cart.address" >Place this Order!</button>
-			</form>
+				<button class = "btn btn-primary" ng-click="placeOrder()" ng-disabled="!cart.address || !canPlaceOrder" >Place this Order!</button>
+				<div ng-if="!canPlaceOrder">
+					<h1 style="color:red"> Please confirm the quantity change at the top of this page before continue</h1>
+				</div>
+				<div ng-if="!cart.address">
+					<h1 style="color:red"> Please select an address before continue</h1>
+				</div>
+		</form>
 	</div>
 
 
