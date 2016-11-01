@@ -15,30 +15,21 @@ module.exports = function (app, db) {
         callbackURL: googleConfig.callbackURL
     };
 
-    var verifyCallback = function (accessToken, refreshToken, profile, done) {
-
-        User.findOne({
-                where: {
-                    google_id: profile.id
-                }
-            })
-            .then(function (user) {
-                if (user) {
-                    return user;
-                } else {
-                    return User.create({
-                        google_id: profile.id
-                    });
-                }
-            })
-            .then(function (userToLogin) {
-                done(null, userToLogin);
-            })
-            .catch(function (err) {
-                console.error('Error creating user from Google authentication', err);
-                done(err);
-            });
-
+    var verifyCallback = function (token, refreshToken, profile, done) {
+      var info = {
+        firstName: profile.displayName.split(" ")[0] || null,
+        // google may not provide an email, if so we'll just fake it
+        email: profile.emails ? profile.emails[0].value : [profile.username , 'fake-auther-email.com'].join('@'),
+        avatar: profile.photos ? profile.photos[0].value : undefined
+      };
+      User.findOrCreate({
+        where: {google_id: profile.id},
+        defaults: info
+      })
+      .spread(function (user) {
+        done(null, user);
+      })
+      .catch(done);
     };
 
     passport.use(new GoogleStrategy(googleCredentials, verifyCallback));
