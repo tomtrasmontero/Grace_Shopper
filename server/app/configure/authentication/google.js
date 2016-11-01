@@ -19,7 +19,7 @@ module.exports = function (app, db) {
       var info = {
         firstName: profile.displayName.split(" ")[0] || null,
         // google may not provide an email, if so we'll just fake it
-        email: profile.emails ? profile.emails[0].value : [profile.username , 'fake-auther-email.com'].join('@'),
+        email: profile.emails ? profile.emails[0].value : [profile.username , 'example.com'].join('@'),
         avatar: profile.photos ? profile.photos[0].value : undefined
       };
       User.findOrCreate({

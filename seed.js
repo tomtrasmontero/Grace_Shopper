@@ -149,7 +149,7 @@ var seedInstruments = function() {
             family: "family" + randomIt(1,5),
             type: productType[idx-1],
             description: faker.company.bs(),
-            image: [faker.image.avatar(),faker.image.avatar(),faker.image.avatar()],
+            image: [faker.image.imageUrl(250, 250) + "?v=" + randomIt(0,1000),faker.image.imageUrl(250, 250) + "?v=" + randomIt(0,1000),faker.image.imageUrl(250, 250) + "?v=" + randomIt(0,1000)],
             quantity: randomIt(1,99)
         });
     }
