@@ -12,9 +12,9 @@
 			<div class="w3-row">
 				<img class="slideImg img-responsive w3-col m3 l3" ng-src="{{item.instrument.image[0]}}" style="width:60px; height:60px">
 				<h3 class="w3-col m3 l3">&nbsp&nbsp{{item.instrument.title}}</h3>
-				<h4 class="w3-col m3 l3" ng-if="!show[$index]">&nbsp Quantity: {{item.quantity}} </h4>
+				<h3 class="w3-col m3 l3" ng-if="!show[$index]">&nbsp Quantity: {{item.quantity}} </h3>
 				<input ng-if="show[$index]" class="form-control w3-col m3 l3" type="number" ng-model = "item.quantity" required>
-				<h4 class="w3-col m3 l3 pull-right">&nbsp subtotal is {{item.instrument.price * item.quantity | number:2}}</h4>
+				<h3 class="w3-col m3 l3 pull-right">&nbsp subtotal is {{item.instrument.price * item.quantity | number:2}}</h3>
 			</div>
 			<div class="w3-row">
 				<button ng-if="!show[$index]" class="btn btn-warning w3-col m3 l3 pull-right" ng-click="editQuantity($index)"> Edit Quantity</button>
