@@ -4,8 +4,9 @@ app.directive('productCard', function(){
 		scope:{
 			product: '='
 		},
+		//used this template instead of templateURL due to heroku error
 		template: "\
-		<div class='container col-xs-12 col-md-4'> \
+		<div class='container col-xs-12'> \
 			<div>\
 				<h3 class='text-center'>{{product.title}}</h3> \
 				<a ui-sref='productDetail({ id: {{product.id}} })'' class='thumbnail'> \
