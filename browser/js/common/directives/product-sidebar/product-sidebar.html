@@ -1,9 +1,9 @@
 <div class='container hidden-xs col-xs-3 pull-left sidebar-outer'>
     <div class='list-group fixed'>
-        <h3 class='list-group-item-heading'>Search</h3>
-        <input class='list-group-item' onClick="this.select();" type='text' ng-model='query' placeholder='by Product'>
-        <br>
         <div>
+	        <h3 class='list-group-item-heading'>Search</h3>
+	        <input class='list-group-item' onClick="this.select()" ng-click="searchText()" type='text' ng-model='query' placeholder='by Product'>
+	        <br>
             <h3 class='list-group-item-heading'>or Categories</h3>
             <li class='list-group-item list-group-item-action' ng-model='searchFil' ng-repeat='product in productType'><a href="" ng-click='searchCategories(product)'>{{product}}</a></li>
         </div>

@@ -17,6 +17,10 @@ app.directive('productSidebar', function(){
 				$scope.searchFil = productCat;
 			};
 
+			$scope.searchText = function(){
+				$scope.searchFil = '';
+			}
+
 			$scope.productType = ['Guitar','Drums','Bass','DJ','Band & Orchestra','Mics & Wireless'];
 
 		}
