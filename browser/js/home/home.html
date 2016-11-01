@@ -6,11 +6,23 @@
 	</div>
 	<div class="container" ng-hide="!!user && user.orders.length">
 	<h2>Best Sellers</h2>
-		<div class='col-xs-9'>	
+
+		<div class="container">
+			<div class="row">
+				<div ng-repeat="product in bestSellers" class="col-xs-3">
+					<h3 class='text-center'>{{product.title}}</h3>
+					<a ui-sref="productDetail({ id: {{product.id}} })" class='thumbnail'>
+						<img class='img-responsive' ng-src="{{product.image[0]}}" style='width:100%;height:250px;'/>
+					</a>
+				</div>
+			</div>
+		</div>
+<!-- 		<div>
+		<div class='col-xs-12'>	
 			<ul class='list-group'>
 				<data-product-card ng-repeat='instrument in bestSellers' product="instrument"></data-product-card>	
 			</ul>
 			<br clear='all'>
 		</div>
-	</div>
+	</div> -->
 </section>
