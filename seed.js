@@ -143,7 +143,7 @@ var seedInstruments = function() {
     for (var i = 0; i < numUsers+25; i++) {
         var idx = randomIt(1,6);
         instruments.push({
-            title: productType[idx-1] + (i+1),
+            title: productType[idx-1] + " " + (i+1),
             brand: "brand" + randomIt(1,15),
             price: (Math.random()*100.00).toFixed(2),
             family: "family" + randomIt(1,5),
