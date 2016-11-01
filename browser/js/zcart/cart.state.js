@@ -60,6 +60,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				ZCartFactory.placeOrder($scope.cart.id, $scope.cart.address.id);
 				$state.go('confirmation', {orderid: cart.id});
 				ZCartFactory.loadCart();
+
+				emailjs.send('default_service','confirmation',{
+				  email: cart.user.email, 
+				  number: cart.id, 
+				});
 			}
 		}
 	})

@@ -59,7 +59,7 @@ var seedUsers = function () {
         },        
     ];
 
-    for (let i = 0; i < numUsers - 1; i++) {
+    for (var i = 0; i < numUsers - 1; i++) {
         users.push({
             email: faker.internet.email(),
             password: 'password',
@@ -81,7 +81,7 @@ var seedUsers = function () {
 var seedAddresses = function() {
 
     var addresses = [];
-    for (let i = 0; i < numUsers; i++) {
+    for (var i = 0; i < numUsers; i++) {
         addresses.push({
             line1: faker.address.streetAddress(),
             line2: faker.address.secondaryAddress(),
@@ -105,9 +105,9 @@ var seedAddresses = function() {
 var seedOrders = function() {
 
     var orders = [];
-    for (let i = 0; i < numUsers; i++) {
+    for (var i = 0; i < numUsers; i++) {
 
-        let isPlaced = [false, true][[Math.round(Math.random())]]
+        var isPlaced = [false, true][[Math.round(Math.random())]]
 
         orders.push({
             status: (isPlaced? 'order': 'cart'),
@@ -140,7 +140,7 @@ var seedInstruments = function() {
     var productType = ['Guitar','Drums','Bass','DJ','Band & Orchestra','Mics & Wireless'];
     var instruments = [];
     
-    for (let i = 0; i < numUsers+25; i++) {
+    for (var i = 0; i < numUsers+25; i++) {
 
         instruments.push({
             title: "title" + (i+1),
@@ -164,7 +164,7 @@ var seedInstruments = function() {
 
 var seedReviews = function() {
     var reviews = [];
-    for (let i = 0; i < numUsers; i++) {
+    for (var i = 0; i < numUsers; i++) {
 
         reviews.push({
             content: faker.lorem.paragraph(),
@@ -188,7 +188,7 @@ var seedReviews = function() {
 var seedOrderItems = function() {
 
     var orderItems = [];
-    for (let i = 0; i < numUsers; i++) {
+    for (var i = 0; i < numUsers; i++) {
 
         orderItems.push({
             quantity: i+1,
