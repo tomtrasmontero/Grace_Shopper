@@ -49,9 +49,19 @@ router.delete('/:id', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
-    User.findById(req.params.id)
-    .then(function(user) {
-        return user.update(req.body);
+    console.log(req.body.user);
+    User.update({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone
+    }, {
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(function() {
+        return User.findById(req.params.id)
     })
     .then(function(user) {
         res.send(user);

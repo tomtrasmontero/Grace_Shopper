@@ -5,7 +5,7 @@
   "main": "server/start.js",
   "scripts": {
     "start": "node server",
-    "start:dev": "LOGGING=true nodemon --watch server -e js,html server/start.js",
+    "start:dev": "nodemon --watch server -e js,html server/start.js",
     "postinstall": "gulp build"
   },
   "engines": {
