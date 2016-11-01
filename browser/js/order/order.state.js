@@ -15,6 +15,16 @@ app.config(function($stateProvider, $urlRouterProvider){
 				$scope.numPerPage = 3;
 				$scope.displayOrders = $scope.orders.slice(0,$scope.numPerPage);
 
+				$scope.emptySearch = function(){
+					$scope.search.orderId = "";
+					$scope.search.email = "";
+					$scope.search.status = "";
+					$scope.search.state = "";
+					$scope.search.city = "";
+					$scope.search.zipcode = "";
+					$scope.search.country = "";
+				}
+
 				$scope.pageChanged = function(){
 					var startPos = ($scope.page-1) * $scope.numPerPage;
 				}
@@ -49,7 +59,6 @@ app.config(function($stateProvider, $urlRouterProvider){
 				for (var i =0; i<$scope.order.orderitems.length; i++){
 					$scope.total = $scope.total + ($scope.order.orderitems[i].instrument.price * $scope.order.orderitems[i].quantity);
 				}
-
 
 				$scope.editQuantity = function(index){
 					$scope.show[index] = true;
