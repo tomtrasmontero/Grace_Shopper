@@ -15,6 +15,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controller: function($scope, $state, cart, ZCartFactory, AuthService, Session, $rootScope) {
 			$scope.cart = cart;
 			$scope.newAddress = {};
+			$scope.canPlaceOrder = true;
 			$scope.total = function(){
 				return ZCartFactory.getTotal($scope.cart.orderitems);
 			}
@@ -37,15 +38,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 			$scope.deleteAddress = function(id){
 				ZCartFactory.deleteAddress(id);
+				console.log("address length is ");
+				console.log ($scope.cart.user);
 			}
 
 			$scope.editQuantity = function(index){
 				$scope.show[index] = true;
+				$scope.canPlaceOrder = false;
 			}
 
 			$scope.changeQuantity = function(itemid, quantity, orderid, orderitemIndex){
 				ZCartFactory.changeOrderItem(itemid, quantity, orderid, orderitemIndex);
 				$scope.show[orderitemIndex] = false;
+				$scope.canPlaceOrder = true;
 			}
 
 			$scope.deleteItem = function(item){
