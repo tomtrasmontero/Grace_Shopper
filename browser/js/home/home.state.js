@@ -2,18 +2,22 @@ app.config(function ($stateProvider) {
     $stateProvider.state('home', {
         url: '/',
         templateUrl: 'js/home/home.html',
-        controller: function(homeService, userFactory, $scope, Session) {
+        controller: function(userFactory, $scope, Session, bestSellers) {
         	if (Session.user) {
                 userFactory.getById(Session.user.id)
                 .then(function(user) {
                     $scope.user = user;
                 });
             }
-
-            homeService.getBestSellers()
-        	.then(function(bestSellers) {
-        		$scope.bestSellers = bestSellers.slice(0,4);
-        	});
+        	$scope.bestSellers = bestSellers;
+        },
+        resolve: {
+            bestSellers: function(homeService) {
+                return homeService.getBestSellers()
+                    .then(function(bestSellers) {
+                    return bestSellers.slice(0,4);
+                });
+            }
         }
     });
 });
