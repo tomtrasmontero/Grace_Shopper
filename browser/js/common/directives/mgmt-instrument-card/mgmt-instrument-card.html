@@ -1,7 +1,9 @@
 <div class='container addPaddingBot'>
 	<span class='h1'>Product Management Edit Page</span>
+	<!-- onaftersave executes when button type submit is pressed -->
 	<form editable-form name='editableForm' onaftersave='edit(product)'>
 	<div>
+		<button type='button' class='btn btn-danger' ng-click='deleteProduct(product.id)' ng-show='!editableForm.$visible'>Delete</button>	
 		<button type='button' class='btn btn-info' ng-click='editableForm.$show()' ng-show='!editableForm.$visible'>Edit</button>
 		<span ng-show='editableForm.$visible'>
 			<button type='submit' class='btn btn-primary' ng-disabled='editableForm.$waiting'>Save</button>
@@ -40,10 +42,12 @@
 		</div>		
 	</div>	
 	<br clear='all'>
+	<br>
 
 	<div class='container'>
-		<div>
-		<input type='button' class='btn btn-success' value='Add Photo'/>
+		<div class='input-group input-group-lg col-md-12' ng-show='editableForm.$visible' >
+		<label>Add New Image Here!</label>
+		<input type='text' ng-model='product.newImgUrl' ng-disabled='editableForm.$waiting' class='form-control' placeholder="Insert New Image URL Here!"/>
 		</div>
 		<br>	
 		<div ng-repeat='picture in product.image track by $index' class='col-md-4'>

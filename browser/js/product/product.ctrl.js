@@ -51,26 +51,42 @@ app.controller('productMgmtCtrl', function($scope, products,productFactory,$stat
 		$state.go('productMgmtEdit', {myProduct: product});
 	};
 
-	$scope.deleteProduct = function(id){
-
-	}
 
 });
 
 //Products Edit controller
 app.controller('productEditCtrl', function($scope,$state, productFactory){
+	if(!$state.params.myProduct){
+		$state.go('productMgmt');
+	}
+
 	$scope.product = $state.params.myProduct;
 	$scope.deleteButton = false;
 
 	$scope.edit = function(product){
+		// update the image on the front end
+		if(product.newImgUrl){
+			$scope.product.image.push(product.newImgUrl);
+			//send the new image to the server
+			product.image = $scope.product.image;	
+		}
+
 		productFactory.editProduct(product)
 		.then(function(){
+			$scope.product.newImgUrl = "";
 			console.log('object updated')
 		})
 	};
 
 	$scope.deleteImg = function(idx){
 		productFactory.editImg($scope.product.image,idx)
+	};
+
+	$scope.deleteProduct = function(id){
+		productFactory.deleteProduct(id)
+		.then( function(){
+			$state.go('productMgmt');
+		})
 	};
 	
 });

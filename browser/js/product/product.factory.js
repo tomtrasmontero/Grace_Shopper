@@ -30,6 +30,9 @@ app.factory('productFactory', function($http){
 		},
 		editProduct: function(product){
 			return $http.put('/api/product/edit', product);		
+		},
+		deleteProduct: function(id){
+			return $http.delete('/api/product/destroy/' + id);
 		}
 
 	};

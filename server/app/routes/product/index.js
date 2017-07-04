@@ -62,7 +62,6 @@ router.get('/:id', function(req,res,next){
 });
 
 router.put('/edit', function(req,res,next){
-	console.log(req.body);
 	Instrument.update(
 	{
 		title: req.body.title,
@@ -82,7 +81,13 @@ router.put('/edit', function(req,res,next){
 	.catch(next);
 });
 
-
+router.delete('/destroy/:id', function(req,res,next){
+	Instrument.destroy({ where: { id: req.params.id} })
+	.then(function(result) {
+		res.sendStatus(200);
+	})
+	.catch(next);
+});
 
 
 
