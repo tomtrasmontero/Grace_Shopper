@@ -3,7 +3,6 @@ app.factory('homeService', function($http) {
 		getBestSellers: function() {
 			return $http.get('/api/product/bestsellers')
 			.then(function(results) {
-				console.log(results);
 				return results.data;
 			});
 		}

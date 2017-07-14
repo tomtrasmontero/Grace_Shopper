@@ -74,8 +74,7 @@ app.controller('productEditCtrl', function($scope,$state, productFactory){
 		productFactory.editProduct(product)
 		.then(function(){
 			$scope.product.newImgUrl = "";
-			console.log('object updated')
-		})
+		});
 	};
 
 	$scope.deleteImg = function(idx){
