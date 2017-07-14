@@ -1,25 +1,25 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
+<div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            </div>
+            <ul class="nav navbar-nav">
+                <li ng-repeat="item in items" ng-show="!item.auth || isAuthorized(item.auth)">
+                    <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+                </li>
+            </ul>
+            <div class="row">
+                <div class="welcome">
+                    <span>Welcome{{!user? "": ", " + (user.firstName || user.email)}}!</span>
+                        <a ng-show="!!user" ng-click ="logout()">Logout</a>
+                        <span ng-show="!user">
+                        <a ui-sref="login">Login</a> or <a ui-sref="register">Register</a>
+                    </span>
+                    <span>
+                    <a ui-sref-active="active" ui-sref="cart" class="glyphicon glyphicon-shopping-cart">({{ cart.orderitems.length }})</a>
+                    </span>
+                </div>
+            </div>
         </div>
-        <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isAuthorized(item.auth)">
-                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-            </li>
-            <li>
-                
-            </li>
-        </ul>
-        <div class="welcome">
-            <span>Welcome{{!user? "": ", " + (user.firstName || user.email)}}!</span>
-            <a ng-show="!!user" ng-click ="logout()">Logout</a>
-            <span ng-show="!user">
-            <a ui-sref="login">Login</a> or <a ui-sref="register">Register</a>
-            </span>
-            <span>
-            <a ui-sref-active="active" ui-sref="cart" class="glyphicon glyphicon-shopping-cart">({{ cart.orderitems.length }})</a>
-            </span>
-        </div>
-
-    </div>
-</nav>
+    </nav> 
+</div>
