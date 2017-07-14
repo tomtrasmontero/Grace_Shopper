@@ -27,15 +27,24 @@
     <script src="/main.js"></script>
 </head>
 <body ng-app="FullstackGeneratedApp">
-    <h1 class='text-center'>Grace Shopper</h1>
-    <p class="text-center lead">Buy our super cool stuff</p>
+  <div class="row">
+    <div class="container-fluid">
+      <div class="col-sm-12">
+        <h1 class='text-center'>Grace Shopper</h1>
+        <div class="hidden-xs">
+          <p class="text-center lead">Buy our super cool stuff</p>
+        </div>
+      </div>
+    </div>
+  </div>  
     <navbar></navbar>
     <div id="main" ui-view></div>
     </br>
     </br>
     </br>
     </br>
-
+<div class="row">
+  <div class="container-fluid">
     <footer class="navbar navbar-default">
         <div class="container">
           <p class="navbar-text pull-left">© 2016 - Site Built By WKT</p>
@@ -47,7 +56,9 @@
           
           <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="navbar-btn btn-danger btn pull-right">
           <span class="glyphicon glyphicon-star"></span>  Watch us on YouTube!</a>
-    </footer>
+    </footer>  
+  </div>
+</div>
     
 </body>
 </html>
