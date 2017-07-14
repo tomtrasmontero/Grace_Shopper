@@ -1,5 +1,5 @@
 # Grace_Shopper
-Grace_Shopper is an online e-commerce store which was create for out first Fullstack project at Fullstack Academy.
+Grace_Shopper is an online e-commerce store.  Allows user to shop and allow admins to edit products and orders.
 
 Published Site-
 http://grace-hopper-wkt.herokuapp.com/
